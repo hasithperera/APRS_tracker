@@ -23,6 +23,7 @@ The following command was used to run the iGate
 	- Data collected is available online under the call sign KC3RXZ. a screenshot can be found below. Note that not all the packets were captured by the iGate and the msg_id was used as a counter for how many GPS packets were captured during the test period.Given that the iGate was located indoor and the landscape of the location could account for the lost packets.
 
 APRS ground testing.
+
 <img src="./doc/aprs_test.png" width="50%" />
 
 ## Updates to the PCB
