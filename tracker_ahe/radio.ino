@@ -8,8 +8,6 @@
 // Tx
 // wake A6(D20)
 
-
-
 void init_radio() {
 
   //

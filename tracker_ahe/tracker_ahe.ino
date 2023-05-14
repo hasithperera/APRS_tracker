@@ -18,55 +18,49 @@
 
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
-float freq;                  // the next frequency to scan
+                  // the next frequency to scan
 String packetBuffer;
-
 SoftwareSerial gps(8, 10);  // RX, TX
-
-
 
 char comment[] = "WVU-ERC";
 
 char Lat[] = "3938.83N";
 char Lon[] = "07958.05W";
+char myCALL[] = "KC3RXZ";
 
 int time_share = 0;
 int msg_id = 0;
+int loc_valid = 0;
 
+float freq = 144.390;  // rf.listen();
+
+#define debug 1
 
 
 void setup() {
 
   Serial.begin(9600);  // for logging
-
-
-
-
   // APRS_setPreamble(750);
 
-
+#ifdef debug
   Serial.println("Booting ...");
   Serial.println("initializing I/O");
+  Serial.println("initializing DRA818");
+#endif
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
-  Serial.println("initializing DRA818");
+ 
 
   init_radio();
   radio_on();
   set_radio_pwr(0);
-  // radio_off();
-
-  freq = 144.390;  // rf.listen();
 
 
   //start GPS
   gps.begin(9600);
 
-  // while(rf.available()){
-  //   char inByte = rf.read();
-  //   Serial.write(inByte);
-  // }
-  // rf.end();.39;
+  //init radio module and change frequency 
+
   dra = DRA818::configure(dra_serial, DRA818_VHF, freq, freq, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
     Serial.println("Radio - error");
@@ -75,87 +69,46 @@ void setup() {
   }
 }
 
-
-
 void loop() {
 
-  //gps.listen();
-
-
-
-  //Serial.println();
-  //if (time_share > 20) {
-
-
-
-
-  // limit 3000 ~7 sec when using characters
-  // reading lines: need to change
-
-  /*
-  while (time_share < 3000)
-    while (gps.available() > 0) {
-      time_share += 1;
-
-      char inByte = gps.read();
-      Serial.write(inByte);
-
-
-      }
-      */
-
-
-  //if inByte=='\n'
-  //}
-
   gps.stopListening();
-
   if (msg_id > 0){
-
     location_update();
   }
 
   gps.listen();
 
-
   while (time_share < 40)
     while (gps.available() > 0) {
       time_share += 1;
-
       String gps_raw = gps.readStringUntil('\n');
+
+      // all GPS packets are printed for debugging
       Serial.println(gps_raw);
+
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
-
-
       if (gps_raw.substring(0, 6) == "$GPGLL") {
        
         //simulate locked data
         //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
 
-        
-        Serial.println(gps_raw);
-
         if (gps_raw.length() > 30) {
-          msg_id ++;
           // GPS locked
-
+          msg_id ++;
           update_GPS(gps_raw);
+
+          //i2c functions needed 
+
         }
       }
-
-      //delay(5000);
     }
 }
 
 void update_GPS(String gps_data) {
-  //char data[100];
-  //gps_data.toCharArray(*data,100);
-  //Serial.println("extraction function");
 
-  //Serial.print(gps_data.substring(7,7+10));
-  //Serial.println(gps_data.charAt(18));
-
-
+  //data is sent with 2 decimal places 
+  // reformat the data to be used by the APRS library 
+ 
   gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
   Lat[7] = char(gps_data.charAt(18));
   Serial.println(Lat);
@@ -163,6 +116,7 @@ void update_GPS(String gps_data) {
   gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
   Lon[8] = char(gps_data.charAt(32));
   Serial.println(Lon);
+  loc_valid = 1;
 }
 
 
@@ -173,11 +127,8 @@ void location_update() {
   Serial.println("APRS:start");
   time_share = 0;
   APRS_init();
-  char myCALL[] = "KC3RXZ";
 
-
-
-  APRS_setPreamble(500);
+  APRS_setPreamble(750);
   APRS_setCallsign(myCALL, 9);
   APRS_setLat(Lat);
   APRS_setLon(Lon);
@@ -188,6 +139,8 @@ void location_update() {
   APRS_sendLoc(comment, strlen(comment), ' ');
   delay(1200);
   Serial.println("APRS:end");
+  
+  //clear location validitiy after sending 
+  loc_valid =0;
 
-  //gps.flush();
 }
