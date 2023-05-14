@@ -26,7 +26,14 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 char comment[] = "WVU-ERC";
+
+char Lat[] = "3938.83N";
+char Lon[] = "07958.05W";
+
 int time_share = 0;
+int msg_id = 0;
+
+
 
 void setup() {
 
@@ -49,7 +56,7 @@ void setup() {
   set_radio_pwr(0);
   // radio_off();
 
-  freq = 145.390;  // rf.listen();
+  freq = 144.390;  // rf.listen();
 
 
   //start GPS
@@ -72,43 +79,115 @@ void setup() {
 
 void loop() {
 
+  //gps.listen();
+
+
+
+  //Serial.println();
+  //if (time_share > 20) {
+
+
+
+
+  // limit 3000 ~7 sec when using characters
+  // reading lines: need to change
+
+  /*
+  while (time_share < 3000)
+    while (gps.available() > 0) {
+      time_share += 1;
+
+      char inByte = gps.read();
+      Serial.write(inByte);
+
+
+      }
+      */
+
+
+  //if inByte=='\n'
+  //}
+
+  gps.stopListening();
+
+  if (msg_id > 0){
+
+    location_update();
+  }
+
   gps.listen();
 
 
-
-  Serial.println();
-  //if (time_share > 20) {
-  location_update();
-  while (time_share < 1000)
+  while (time_share < 40)
     while (gps.available() > 0) {
       time_share += 1;
-      char inByte = gps.read();
-      Serial.write(inByte);
+
+      String gps_raw = gps.readStringUntil('\n');
+      Serial.println(gps_raw);
+      // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
+
+
+      if (gps_raw.substring(0, 6) == "$GPGLL") {
+       
+        //simulate locked data
+        //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+
+        
+        Serial.println(gps_raw);
+
+        if (gps_raw.length() > 30) {
+          msg_id ++;
+          // GPS locked
+
+          update_GPS(gps_raw);
+        }
+      }
+
+      //delay(5000);
     }
-  time_share++;
 }
 
+void update_GPS(String gps_data) {
+  //char data[100];
+  //gps_data.toCharArray(*data,100);
+  //Serial.println("extraction function");
+
+  //Serial.print(gps_data.substring(7,7+10));
+  //Serial.println(gps_data.charAt(18));
+
+
+  gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
+  Lat[7] = char(gps_data.charAt(18));
+  Serial.println(Lat);
+
+  gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
+  Lon[8] = char(gps_data.charAt(32));
+  Serial.println(Lon);
+}
 
 
 void location_update() {
   //radio_TX();
-  Serial.print("t:");
+  Serial.println("t:");
   Serial.println(time_share);
-  Serial.println("Update APRS location");
+  Serial.println("APRS:start");
   time_share = 0;
   APRS_init();
   char myCALL[] = "KC3RXZ";
 
-  char Lat[] = "3938.83N";
-  char Lon[] = "07958.05W";
 
-  APRS_setPreamble(300);
+
+  APRS_setPreamble(500);
   APRS_setCallsign(myCALL, 9);
   APRS_setLat(Lat);
   APRS_setLon(Lon);
   APRS_setSymbol('S');
 
   //delay(100);
+  sprintf(comment,"WVUERC msg_id:%d",msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
-  delay(1000);
+  delay(1200);
+  Serial.println("APRS:end");
+
+  //gps.flush();
 }
