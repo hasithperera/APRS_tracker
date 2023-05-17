@@ -18,6 +18,10 @@
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
+
+#define main_freq 144.390
+#define backup_freq 145.390
+
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
                   // the next frequency to scan
@@ -34,9 +38,11 @@ int time_share = 0;
 int msg_id = 0;
 int loc_valid = 0;
 
-float freq = 144.390;  // rf.listen();
+float freq = main_freq;  // rf.listen();
 
+//debug and testing flags
 #define debug 1
+//#define simulate 1
 
 
 void setup() {
@@ -45,9 +51,8 @@ void setup() {
   // APRS_setPreamble(750);
 
 #ifdef debug
-  Serial.println("Booting ...");
-  Serial.println("initializing I/O");
-  Serial.println("initializing DRA818");
+  Serial.println("[info] Booting ...");
+  Serial.println("[info] initializing RF");
 #endif
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -65,9 +70,9 @@ void setup() {
 
   dra = DRA818::configure(dra_serial, DRA818_VHF, freq, freq, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
-    Serial.println("Radio - error");
+    Serial.println("[err!] RF - error");
   } else {
-    Serial.println("Init - ok");
+    Serial.println("[info] RF - ok");
   }
 }
 
@@ -97,7 +102,9 @@ void loop() {
       if (gps_raw.substring(0, 6) == "$GPGLL") {
        
         //simulate locked data
-        gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+        #ifdef simulate
+          gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+        #endif
 
         if (gps_raw.length() > 30) {
           // GPS locked
@@ -140,9 +147,7 @@ int location_update() {
       }
   }
   //radio_TX();
-  Serial.println("t:");
-  Serial.println(time_share);
-  Serial.println("APRS:start");
+  Serial.println("[info] APRS:start");
   time_share = 0;
   APRS_init();
 
@@ -156,7 +161,7 @@ int location_update() {
   sprintf(comment,"WVUERC msg_id:%d",msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
   delay(1200);
-  Serial.println("APRS:end");
+  Serial.println("[info] APRS:end");
   
   //clear location validitiy after sending 
   return 0;

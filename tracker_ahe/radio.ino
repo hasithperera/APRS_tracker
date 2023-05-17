@@ -32,7 +32,7 @@ void init_radio() {
   pinMode(radio_sql,INPUT);  
 
   if (digitalRead(alternate_freq)){
-    freq = 145.390;
+    freq = backup_freq;
   #ifdef debug
     Serial.println("[info] Freq at 145.390 Mhz");
   #endif
