@@ -24,20 +24,8 @@ void init_radio() {
   pinMode(radio_pwr, OUTPUT);
   digitalWrite(radio_wake, LOW);
 
-  //radio freq test pin 
-  // set to alternate test frequency
-  pinMode(alternate_freq,INPUT);
-
-  // detect busy radio and wait till clear channel to proceed
-  pinMode(radio_sql,INPUT);  
-
-  if (digitalRead(alternate_freq)){
-    freq = backup_freq;
-  #ifdef debug
-    Serial.println("[info] Freq at 145.390 Mhz");
-  #endif
-  }
-
+  pinMode(radio_freq_sw,INPUT);
+  pinMode(sim_packet,INPUT);
 }
 
 void radio_TX() {
@@ -71,3 +59,4 @@ void set_radio_pwr(int pwr) {
     digitalWrite(radio_pwr, LOW);
   }
 }
+

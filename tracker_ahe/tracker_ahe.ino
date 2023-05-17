@@ -15,12 +15,15 @@
 #define alternate_freq 12
 #define radio_sql 2
 
+#define sim_packet 13
+#define radio_freq_sw 12
+
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
 
-#define main_freq 144.390
-#define backup_freq 145.390
+//#define simulate 1
+
 
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
@@ -32,36 +35,31 @@ char comment[] = "WVU-ERC";
 
 char Lat[] = "3938.83N";
 char Lon[] = "07958.05W";
-char myCALL[] = "KC3RXZ";
 
 int time_share = 0;
 int msg_id = 0;
-int loc_valid = 0;
-
-float freq = main_freq;  // rf.listen();
-
-//debug and testing flags
-#define debug 1
-//#define simulate 1
+int msg_valid = 0;
+char myCALL[] = "KC3RXZ";
+float freq;
 
 
 void setup() {
 
   Serial.begin(9600);  // for logging
-  // APRS_setPreamble(750);
 
-#ifdef debug
-  Serial.println("[info] Booting ...");
-  Serial.println("[info] initializing RF");
-#endif
+  Serial.println("[info] WVU ERC - APRS tracker");
+  Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
-
- 
 
   init_radio();
   radio_on();
   set_radio_pwr(0);
 
+  // afternate frequancy in run time
+  if (digitalRead(radio_freq_sw))
+    freq = 145.390;
+  else
+    freq = 144.390;
 
   //start GPS
   gps.begin(9600);
@@ -70,27 +68,26 @@ void setup() {
 
   dra = DRA818::configure(dra_serial, DRA818_VHF, freq, freq, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
-    Serial.println("[err!] RF - error");
+    Serial.println("[err ] RF init failed");
   } else {
-    Serial.println("[info] RF - ok");
+    Serial.println("[info] RF OK");
   }
 }
 
 void loop() {
 
   gps.stopListening();
-  if (loc_valid){
-    loc_valid = location_update();
-  }else{
-    time_share = 0;
-    #ifdef debug
-      Serial.println("---------------------------------------------------No valid location. Skip APRS");
-    #endif
-  }
 
+  if (msg_id > 0 & msg_valid == 1) {
+    location_update();
+  } else {
+    Serial.println("[info] ------------------------ No location data");
+
+  }
   gps.listen();
 
-  while (time_share < 40)
+
+  while (time_share < 50) {
     while (gps.available() > 0) {
       time_share += 1;
       String gps_raw = gps.readStringUntil('\n');
@@ -100,15 +97,16 @@ void loop() {
 
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
       if (gps_raw.substring(0, 6) == "$GPGLL") {
-       
         //simulate locked data
-        #ifdef simulate
+        if (digitalRead(sim_packet)) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
-        #endif
+          Serial.println("[info] Sim Packet");
+        }
+        Serial.println(gps_raw);
 
         if (gps_raw.length() > 30) {
+          msg_id++;
           // GPS locked
-          msg_id ++;
           update_GPS(gps_raw);
 
           //i2c functions needed 
@@ -116,6 +114,8 @@ void loop() {
         }
       }
     }
+  }
+  time_share = 0;
 }
 
 void update_GPS(String gps_data) {
@@ -130,7 +130,8 @@ void update_GPS(String gps_data) {
   gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
   Lon[8] = char(gps_data.charAt(32));
   Serial.println(Lon);
-  loc_valid = 1;
+
+  msg_valid = 1;
 }
 
 
@@ -158,12 +159,12 @@ int location_update() {
   APRS_setSymbol('S');
 
   //delay(100);
-  sprintf(comment,"WVUERC msg_id:%d",msg_id);
+  sprintf(comment, "WVUERC msg_id:%d", msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
   delay(1200);
-  Serial.println("[info] APRS:end");
-  
-  //clear location validitiy after sending 
-  return 0;
+
+  Serial.println("APRS:end");
+  msg_valid = 0;
+  //gps.flush();
 
 }
