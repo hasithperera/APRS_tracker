@@ -13,8 +13,13 @@
 #define radio_ppt 13  //not needed
 #define radio_pwr 17
 
+#define sim_packet 13
+#define radio_freq_sw 12
+
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
+
+//#define simulate 1
 
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
@@ -23,8 +28,6 @@ String packetBuffer;
 
 SoftwareSerial gps(8, 10);  // RX, TX
 
-
-
 char comment[] = "WVU-ERC";
 
 char Lat[] = "3938.83N";
@@ -32,31 +35,29 @@ char Lon[] = "07958.05W";
 
 int time_share = 0;
 int msg_id = 0;
-
+int msg_valid = 0;
+char myCALL[] = "KC3RXZ";
 
 
 void setup() {
 
   Serial.begin(9600);  // for logging
 
-
-
-
-  // APRS_setPreamble(750);
-
-
-  Serial.println("Booting ...");
-  Serial.println("initializing I/O");
+  Serial.println("[info] WVU ERC - APRS tracker");
+  Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
-  Serial.println("initializing DRA818");
 
   init_radio();
   radio_on();
   set_radio_pwr(0);
-  // radio_off();
 
-  freq = 144.390;  // rf.listen();
+
+  // afternate frequancy in run time
+  if (digitalRead(radio_freq_sw))
+    freq = 145.390;
+  else
+    freq = 144.390;
 
 
   //start GPS
@@ -69,56 +70,24 @@ void setup() {
   // rf.end();.39;
   dra = DRA818::configure(dra_serial, DRA818_VHF, freq, freq, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
-    Serial.println("Radio - error");
+    Serial.println("[err ] RF init failed");
   } else {
-    Serial.println("Init - ok");
+    Serial.println("[info] RF OK");
   }
 }
 
-
-
 void loop() {
 
-  //gps.listen();
-
-
-
-  //Serial.println();
-  //if (time_share > 20) {
-
-
-
-
-  // limit 3000 ~7 sec when using characters
-  // reading lines: need to change
-
-  /*
-  while (time_share < 3000)
-    while (gps.available() > 0) {
-      time_share += 1;
-
-      char inByte = gps.read();
-      Serial.write(inByte);
-
-
-      }
-      */
-
-
-  //if inByte=='\n'
-  //}
-
   gps.stopListening();
-
-  if (msg_id > 0){
-
+  if (msg_id > 0 & msg_valid == 1) {
     location_update();
+  } else {
+    Serial.println("[info] ------------------------ No location data");
   }
-
   gps.listen();
 
 
-  while (time_share < 40)
+  while (time_share < 50) {
     while (gps.available() > 0) {
       time_share += 1;
 
@@ -128,33 +97,28 @@ void loop() {
 
 
       if (gps_raw.substring(0, 6) == "$GPGLL") {
-       
-        //simulate locked data
-        //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
 
-        
+        //simulate locked data
+        if (digitalRead(sim_packet)) {
+          gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+          Serial.println("[info] Sim Packet");
+        }
         Serial.println(gps_raw);
 
         if (gps_raw.length() > 30) {
-          msg_id ++;
+          msg_id++;
           // GPS locked
-
           update_GPS(gps_raw);
         }
       }
 
       //delay(5000);
     }
+  }
+  time_share = 0;
 }
 
 void update_GPS(String gps_data) {
-  //char data[100];
-  //gps_data.toCharArray(*data,100);
-  //Serial.println("extraction function");
-
-  //Serial.print(gps_data.substring(7,7+10));
-  //Serial.println(gps_data.charAt(18));
-
 
   gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
   Lat[7] = char(gps_data.charAt(18));
@@ -163,6 +127,7 @@ void update_GPS(String gps_data) {
   gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
   Lon[8] = char(gps_data.charAt(32));
   Serial.println(Lon);
+  msg_valid = 1;
 }
 
 
@@ -173,8 +138,6 @@ void location_update() {
   Serial.println("APRS:start");
   time_share = 0;
   APRS_init();
-  char myCALL[] = "KC3RXZ";
-
 
 
   APRS_setPreamble(500);
@@ -184,10 +147,10 @@ void location_update() {
   APRS_setSymbol('S');
 
   //delay(100);
-  sprintf(comment,"WVUERC msg_id:%d",msg_id);
+  sprintf(comment, "WVUERC msg_id:%d", msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
   delay(1200);
   Serial.println("APRS:end");
-
+  msg_valid = 0;
   //gps.flush();
 }
