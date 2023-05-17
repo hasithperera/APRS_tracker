@@ -12,6 +12,8 @@
 #define radio_wake 16
 #define radio_ppt 13  //not needed
 #define radio_pwr 17
+#define alternate_freq 12
+#define radio_sql 2
 
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
@@ -72,8 +74,13 @@ void setup() {
 void loop() {
 
   gps.stopListening();
-  if (msg_id > 0){
-    location_update();
+  if (loc_valid){
+    loc_valid = location_update();
+  }else{
+    time_share = 0;
+    #ifdef debug
+      Serial.println("---------------------------------------------------No valid location. Skip APRS");
+    #endif
   }
 
   gps.listen();
@@ -90,7 +97,7 @@ void loop() {
       if (gps_raw.substring(0, 6) == "$GPGLL") {
        
         //simulate locked data
-        //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+        gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
 
         if (gps_raw.length() > 30) {
           // GPS locked
@@ -120,7 +127,18 @@ void update_GPS(String gps_data) {
 }
 
 
-void location_update() {
+int location_update() {
+  int wait = 400;
+
+  // stop transmitting on a busy channel
+  while(digitalRead(radio_sql)==0){
+    wait--;
+    Serial.print(".");
+      if (wait==0){
+        Serial.println("[info] Skip TX: busy channel");
+        return 0;
+      }
+  }
   //radio_TX();
   Serial.println("t:");
   Serial.println(time_share);
@@ -141,6 +159,6 @@ void location_update() {
   Serial.println("APRS:end");
   
   //clear location validitiy after sending 
-  loc_valid =0;
+  return 0;
 
 }

@@ -23,12 +23,28 @@ void init_radio() {
 
   pinMode(radio_pwr, OUTPUT);
   digitalWrite(radio_wake, LOW);
+
+  //radio freq test pin 
+  // set to alternate test frequency
+  pinMode(alternate_freq,INPUT);
+
+  // detect busy radio and wait till clear channel to proceed
+  pinMode(radio_sql,INPUT);  
+
+  if (digitalRead(alternate_freq)){
+    freq = 145.390;
+  #ifdef debug
+    Serial.println("[info] Freq at 145.390 Mhz");
+  #endif
+  }
+
 }
 
 void radio_TX() {
   digitalWrite(radio_ppt, HIGH);
   Serial.print("T");
 }
+
 
 void radio_RX() {
   //pinMode(radio_ppt, OUTPUT);
