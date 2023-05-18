@@ -31,7 +31,7 @@ DRA818 *dra;                 // the DRA object once instanciated
 String packetBuffer;
 SoftwareSerial gps(8, 10);  // RX, TX
 
-char comment[] = "WVU-ERC";
+
 
 char Lat[] = "3938.83N";
 char Lon[] = "07958.05W";
@@ -152,12 +152,12 @@ int location_update() {
   time_share = 0;
   APRS_init();
 
-  APRS_setPreamble(750);
+  APRS_setPreamble(300);
   APRS_setCallsign(myCALL, 9);
   APRS_setLat(Lat);
   APRS_setLon(Lon);
   APRS_setSymbol('S');
-
+  char comment[30];
   //delay(100);
   sprintf(comment, "WVUERC msg_id:%d", msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
