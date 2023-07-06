@@ -1,6 +1,6 @@
 # APRS_tracker
 
-Standalone APRS tracker.
+Standalone APRS tracker. This an Arduino-nano powered APRS tracker with a DRA818V 1 W radio module.
 
 ## Progress
 
@@ -30,7 +30,7 @@ APRS ground testing.
 
 ### update: 05/06/23
 
-- added v2.2 of the PCB.
+- [x] Update PCB based on v1.0
 - [ ] Testing and building pending. (Innovation Hub WVU)
 
 <img src="./doc/aprs_PCB_v2.2.png" width="50%" />
