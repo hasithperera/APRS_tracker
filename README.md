@@ -28,6 +28,15 @@ APRS ground testing.
 
 ## Updates to the PCB
 
+### update: 05/06/23
+
+- added v2.2 of the PCB.
+- [ ] Testing and building pending. (Innovation Hub WVU)
+
+<img src="./doc/aprs_PCB_v2.2.png" width="50%" />
+
+### update: 14/05/23
+
 - PPT 
 - change RX/TX pins to valid pins on the board
 - include the standard connector for connection to the daughter board
@@ -40,5 +49,5 @@ APRS ground testing.
 - [x] get location and update APRS data packet
 - [ ] i2c slave module to provide data to master 
 - [x] field testing 
-- [ ] finalized PCB design 
+- [x] finalized PCB design 
 
