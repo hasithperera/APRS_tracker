@@ -1,7 +1,8 @@
 
 
 #include <stdio.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
+#include <HardwareSerial.h>
 #include "DRA818.h"  // uncomment the following line in DRA818.h (#define DRA818_DEBUG)
 #include <LibAPRS_Tracker.h>
 
@@ -15,7 +16,7 @@
 #define alternate_freq 12
 #define radio_sql 2
 
-#define sim_packet 13
+#define sim_packet 11
 #define radio_freq_sw 12
 
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
@@ -32,14 +33,14 @@ String packetBuffer;
 SoftwareSerial gps(8, 10);  // RX, TX
 
 
-
-char Lat[] = "3938.83N";
-char Lon[] = "07958.05W";
+// W8CUL location
+char Lat[] = "3938.76N";
+char Lon[] = "07958.40W";
 
 int time_share = 0;
 int msg_id = 0;
 int msg_valid = 0;
-char myCALL[] = "KC3RXZ";
+char myCALL[] = "KE8TJE";
 float freq;
 
 
@@ -56,11 +57,13 @@ void setup() {
   set_radio_pwr(0);
 
   // afternate frequancy in run time
-  if (digitalRead(radio_freq_sw))
+  if (digitalRead(radio_freq_sw)){
     freq = 145.390;
-  else
+    Serial.println("[info] Alternate freq set");
+  }else{
     freq = 144.390;
-
+    Serial.println("[info] APRS freq set");
+  }
   //start GPS
   gps.begin(9600);
 
@@ -98,7 +101,7 @@ void loop() {
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
       if (gps_raw.substring(0, 6) == "$GPGLL") {
         //simulate locked data
-        if (digitalRead(sim_packet)) {
+        if (digitalRead(sim_packet)==0) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
           Serial.println("[info] Sim Packet");
         }
@@ -153,13 +156,24 @@ int location_update() {
   APRS_init();
 
   APRS_setPreamble(300);
-  APRS_setCallsign(myCALL, 9);
+  
+  APRS_setCallsign(myCALL, 11);
+  //9 - Mobile station
+  //11 - Aircraft/Balloon
+  //7 - Hand held
+
   APRS_setLat(Lat);
   APRS_setLon(Lon);
-  APRS_setSymbol('S');
+
+  // Icon - setting
+  //APRS_setSymbol('S'); 
+  // S - shuttle
+  // < - Bike
+  
+  APRS_setSymbol('O'); //Balloon
   char comment[30];
   //delay(100);
-  sprintf(comment, "WVUERC msg_id:%d", msg_id);
+  sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
   APRS_sendLoc(comment, strlen(comment), ' ');
   delay(1200);
 

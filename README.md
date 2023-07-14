@@ -28,7 +28,7 @@ APRS ground testing.
 
 ## Updates to the PCB
 
-### update: 05/06/23
+### update: 05/07/23
 
 - [x] Update PCB based on v1.0
 - [ ] Testing and building pending. (Innovation Hub WVU)

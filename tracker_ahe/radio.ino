@@ -24,8 +24,8 @@ void init_radio() {
   pinMode(radio_pwr, OUTPUT);
   digitalWrite(radio_wake, LOW);
 
-  pinMode(radio_freq_sw,INPUT);
-  pinMode(sim_packet,INPUT);
+  pinMode(radio_freq_sw,INPUT_PULLUP);
+  pinMode(sim_packet,INPUT_PULLUP);
 }
 
 void radio_TX() {
