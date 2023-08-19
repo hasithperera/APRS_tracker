@@ -22,6 +22,7 @@
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
+#define timeout 300
 
 //#define simulate 1
 
@@ -90,7 +91,7 @@ void loop() {
   gps.listen();
 
 
-  while (time_share < 50) {
+  while (time_share < timeout) {
     while (gps.available() > 0) {
       time_share += 1;
       String gps_raw = gps.readStringUntil('\n');
