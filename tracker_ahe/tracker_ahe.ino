@@ -22,7 +22,7 @@
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
-#define timeout 50
+#define timeout 300
 
 //#define simulate 1
 
@@ -175,12 +175,15 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
   
   p = strtok(NULL, ",");  //state
+  sprintf(alt,"NEBP WV:%s,",p);
   p = strtok(NULL, ",");    //sta-no
+  strcat(alt,p);
+  strcat(alt,",");
   p = strtok(NULL, ",");    //horizontal
-  sprintf(alt, "NEBP WV e=%s alt=",p);
+  strcat(alt,p);
+  strcat(alt,",alt=");
   p = strtok(NULL, ",");    //alti
   strcat(alt,p);
-
   p = strtok(NULL, ",");    //alti-unit
   strcat(alt,p);
 

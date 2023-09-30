@@ -4,13 +4,12 @@ Standalone APRS tracker. This an Arduino-nano powered APRS tracker with a DRA818
 
 ## Progress
 
-- Current version of the PCB has a lot of bug and additional connections needed. This will be updated asap (05/14/23)
+- Fully functional PCB 
 - Basic full operation was tested with the board externally powered. Refer the test section for details.
-
 
 ## Testing 
 
-In order to make sure the full functionality the generated APRS packets were tested with direwolf with a RTL SDR.
+In order to make sure the full functionality the generated APRS packets were tested with [direwolf](https://github.com/wb2osz/direwolf) with a RTL-SDR.
 The following command was used to run the iGate
 
 ``` rtl_fm -f 144.39M - |direwolf -c sdr.conf -r 24000 -D 1 - ```
@@ -30,16 +29,11 @@ APRS ground testing.
 
 ### update: 05/07/23
 
-- [x] Update PCB based on v1.0
-- [ ] Testing and building pending. (Innovation Hub WVU)
+- [x] Update PCB based on v1.
+- know minor issues
+	- jumpers on the board needs to be larger
 
 <img src="./doc/aprs_PCB_v2.2.png" width="50%" />
-
-### update: 14/05/23
-
-- PPT 
-- change RX/TX pins to valid pins on the board
-- include the standard connector for connection to the daughter board
 
 ## Todo list 
 
@@ -50,4 +44,4 @@ APRS ground testing.
 - [ ] i2c slave module to provide data to master 
 - [x] field testing 
 - [x] finalized PCB design 
-
+- [ ] long range testing at altitude 

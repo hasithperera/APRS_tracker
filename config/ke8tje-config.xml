@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map/>
+    <node name="org">
+      <map/>
+      <node name="ka2ddo">
+        <map/>
+        <node name="yaac">
+          <map>
+            <entry key="AutoCenter" value="false"/>
+            <entry key="Center" value="QEPRqfvnbIvAU/zwTHVrLQ=="/>
+            <entry key="GpsFix" value="~$GPGGA,Thu Sep 07 18:18:28 EDT 2023,39.645739666666664,-79.97193666666666,INVALID,3,7.01,0.0"/>
+            <entry key="Radius.latitude" value="39.666666666666664"/>
+            <entry key="Radius.longitude" value="-79.93333333333334"/>
+            <entry key="YAAC.windowsize.height" value="842"/>
+            <entry key="YAAC.windowsize.width" value="1600"/>
+            <entry key="Zoom" value="64511.37"/>
+            <entry key="currentInfo" value="now Thu Sep 07 18:20:02 EDT 2023, up for 1090 seconds in locale en_US"/>
+            <entry key="currentState" value="heap: 100672312,255852544,3103784960, message cache=17, parse queue=0/1"/>
+            <entry key="description" value="Thu Sep 07 18:20:02 EDT 2023: YAAC 1.0-beta184(10-Aug-2023) on Linux amd64 5.15.0-79-generic with Java Ubuntu 11.0.20.1"/>
+            <entry key="graticuleVisible" value="false"/>
+            <entry key="java.class.path" value="YAAC.jar"/>
+            <entry key="os.name" value="Linux"/>
+            <entry key="plugins" value="sampleplugin"/>
+            <entry key="showOnlyRFOnRadioView" value="true"/>
+            <entry key="user.dir" value="/home/hasith/software/YAAC"/>
+          </map>
+          <node name="Beacons">
+            <map/>
+            <node name="MYCALL">
+              <map>
+                <entry key="ambiguity" value="1.6666666E-4"/>
+                <entry key="beaconName" value="MYCALL"/>
+                <entry key="ctcss" value="TOFF"/>
+                <entry key="decayRatio" value="2"/>
+                <entry key="digipeaters" value="WIDE1-1;WIDE1-1,WIDE2-1"/>
+                <entry key="directionality" value="0"/>
+                <entry key="enabled" value="true"/>
+                <entry key="fixedAltitudeM" value="NaN"/>
+                <entry key="freeText" value="NEBP Recovery"/>
+                <entry key="gain" value="0"/>
+                <entry key="height" value="0"/>
+                <entry key="initialRateSecs" value="60"/>
+                <entry key="latitude" value="39.666666666666664"/>
+                <entry key="longitude" value="-79.93333333333334"/>
+                <entry key="monitorFreq" value="0.0"/>
+                <entry key="offset" value="0"/>
+                <entry key="positionType" value="NO_TIME_W_MESSAGING"/>
+                <entry key="power" value="0"/>
+                <entry key="reportAltitude" value="false"/>
+                <entry key="reportSpeed" value="false"/>
+                <entry key="showDFS" value="false"/>
+                <entry key="showPHG" value="false"/>
+                <entry key="slowRateSecs" value="1800"/>
+                <entry key="status" value="7"/>
+                <entry key="symTableId" value="/"/>
+                <entry key="symbolCode" value="("/>
+                <entry key="type" value="POSITION"/>
+                <entry key="useGpsForPosition" value="true"/>
+                <entry key="useWeather" value="false"/>
+              </map>
+            </node>
+          </node>
+          <node name="Blacklist">
+            <map/>
+          </node>
+          <node name="DigipeatAlias">
+            <map>
+              <entry key="TEMP1" value="true,false,false"/>
+              <entry key="WIDE1" value="true,false,true"/>
+              <entry key="WIDE2" value="true,false,true"/>
+            </map>
+          </node>
+          <node name="Filters">
+            <map/>
+            <node name="Destinations">
+              <map/>
+            </node>
+            <node name="SendingStation">
+              <map/>
+            </node>
+          </node>
+          <node name="Fonts">
+            <map/>
+          </node>
+          <node name="MessageGroup">
+            <map>
+              <entry key="ALL" value="true"/>
+              <entry key="ALL.type" value="1"/>
+              <entry key="BOM_WARN" value="true"/>
+              <entry key="BOM_WARN.type" value="2"/>
+              <entry key="CQ" value="true"/>
+              <entry key="CQ.type" value="1"/>
+              <entry key="NWS-ADVIS" value="true"/>
+              <entry key="NWS-ADVIS.type" value="2"/>
+              <entry key="NWS-WARN" value="true"/>
+              <entry key="NWS-WARN.type" value="2"/>
+              <entry key="NWS-WATCH" value="true"/>
+              <entry key="NWS-WATCH.type" value="2"/>
+              <entry key="NWS_ADVIS" value="true"/>
+              <entry key="NWS_ADVIS.type" value="2"/>
+              <entry key="NWS_WARN" value="true"/>
+              <entry key="NWS_WARN.type" value="2"/>
+              <entry key="NWS_WATCH" value="true"/>
+              <entry key="NWS_WATCH.type" value="2"/>
+              <entry key="QSY" value="true"/>
+              <entry key="QSY.type" value="1"/>
+            </map>
+          </node>
+          <node name="MonitoredStations">
+            <map/>
+          </node>
+          <node name="Ports">
+            <map>
+              <entry key="Port1" value="AGWPE,Port1 first soundcard mono,8000,KE8TJE-1,,false,TEMP1;localhost;true;false;1;0/-120/10;0;MYCALL"/>
+              <entry key="Port2" value="Serial_GPS,/dev/ttyACM0,9600,,,false;;true;false;0;0/-120/10;0;"/>
+            </map>
+          </node>
+          <node name="StationMap">
+            <map>
+              <entry key="drawAliasInsteadOfCallsign" value="false"/>
+              <entry key="drawAlohaCircle" value="false"/>
+              <entry key="drawDeadReckoning" value="false"/>
+            </map>
+          </node>
+          <node name="Status">
+            <map/>
+          </node>
+          <node name="Tables">
+            <map>
+              <entry key="Connections" value=""/>
+              <entry key="HealthMonitor.tab.config" value="0,75;1,75;2,75;3,75;4,75;5,75;6,75;7,75"/>
+              <entry key="HealthMonitor.tab.igate" value=""/>
+              <entry key="HealthMonitor.tab.status" value=""/>
+              <entry key="HealthMonitor.tab.weather" value=""/>
+              <entry key="HeardList" value="0,75;1,75;2,75;3,75;4,75"/>
+              <entry key="LocateLandmark" value="0,178;1,178;2,178;3,177"/>
+              <entry key="Messages" value="0,110;1,60;2,70;3,350;4,50;5,70"/>
+              <entry key="PluginStore" value=""/>
+              <entry key="TelemetryList" value=""/>
+            </map>
+          </node>
+          <node name="WayTypeLayers">
+            <map>
+              <entry key="AMENITY.color1" value="-7706805"/>
+              <entry key="AMENITY.labelZoom" value="3750.0"/>
+              <entry key="AMENITY.visible" value="true"/>
+              <entry key="AMENITY.zoomLevel" value="18750.0"/>
+              <entry key="AWY_AERODROME.checkSize" value="4"/>
+              <entry key="AWY_AERODROME.color1" value="1023410175"/>
+              <entry key="AWY_AERODROME.color2" value="1023410175"/>
+              <entry key="AWY_AERODROME.labelZoom" value="120000.0"/>
+              <entry key="AWY_AERODROME.visible" value="true"/>
+              <entry key="AWY_AERODROME.zoomLevel" value="600000.0"/>
+              <entry key="AWY_APRON.color1" value="-16776961"/>
+              <entry key="AWY_APRON.labelZoom" value="60000.0"/>
+              <entry key="AWY_APRON.visible" value="true"/>
+              <entry key="AWY_APRON.zoomLevel" value="300000.0"/>
+              <entry key="AWY_RUNWAY.color1" value="-16776961"/>
+              <entry key="AWY_RUNWAY.labelZoom" value="120000.0"/>
+              <entry key="AWY_RUNWAY.visible" value="true"/>
+              <entry key="AWY_RUNWAY.zoomLevel" value="600000.0"/>
+              <entry key="AWY_TAXIWAY.color1" value="-16776961"/>
+              <entry key="AWY_TAXIWAY.labelZoom" value="60000.0"/>
+              <entry key="AWY_TAXIWAY.visible" value="true"/>
+              <entry key="AWY_TAXIWAY.zoomLevel" value="300000.0"/>
+              <entry key="AWY_UNKNOWN.color1" value="-16776961"/>
+              <entry key="AWY_UNKNOWN.labelZoom" value="60000.0"/>
+              <entry key="AWY_UNKNOWN.visible" value="true"/>
+              <entry key="AWY_UNKNOWN.zoomLevel" value="300000.0"/>
+              <entry key="BDY_ADMINISTRATIVE.color1" value="1352704160"/>
+              <entry key="BDY_ADMINISTRATIVE.labelZoom" value="60000.0"/>
+              <entry key="BDY_ADMINISTRATIVE.visible" value="true"/>
+              <entry key="BDY_ADMINISTRATIVE.zoomLevel" value="300000.0"/>
+              <entry key="BDY_ADMIN_1.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_1.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_ADMIN_1.visible" value="true"/>
+              <entry key="BDY_ADMIN_1.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_ADMIN_10.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_10.labelZoom" value="1875.0"/>
+              <entry key="BDY_ADMIN_10.visible" value="true"/>
+              <entry key="BDY_ADMIN_10.zoomLevel" value="9375.0"/>
+              <entry key="BDY_ADMIN_11.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_11.labelZoom" value="937.5"/>
+              <entry key="BDY_ADMIN_11.visible" value="true"/>
+              <entry key="BDY_ADMIN_11.zoomLevel" value="4687.5"/>
+              <entry key="BDY_ADMIN_2.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_2.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_ADMIN_2.visible" value="true"/>
+              <entry key="BDY_ADMIN_2.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_ADMIN_3.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_3.labelZoom" value="3200000.0"/>
+              <entry key="BDY_ADMIN_3.visible" value="true"/>
+              <entry key="BDY_ADMIN_3.zoomLevel" value="1.6E7"/>
+              <entry key="BDY_ADMIN_4.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_4.labelZoom" value="3200000.0"/>
+              <entry key="BDY_ADMIN_4.visible" value="true"/>
+              <entry key="BDY_ADMIN_4.zoomLevel" value="1.6E7"/>
+              <entry key="BDY_ADMIN_5.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_5.labelZoom" value="70000.0"/>
+              <entry key="BDY_ADMIN_5.visible" value="true"/>
+              <entry key="BDY_ADMIN_5.zoomLevel" value="350000.0"/>
+              <entry key="BDY_ADMIN_6.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_6.labelZoom" value="60000.0"/>
+              <entry key="BDY_ADMIN_6.visible" value="true"/>
+              <entry key="BDY_ADMIN_6.zoomLevel" value="300000.0"/>
+              <entry key="BDY_ADMIN_7.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_7.labelZoom" value="7500.0"/>
+              <entry key="BDY_ADMIN_7.visible" value="true"/>
+              <entry key="BDY_ADMIN_7.zoomLevel" value="37500.0"/>
+              <entry key="BDY_ADMIN_8.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_8.labelZoom" value="7500.0"/>
+              <entry key="BDY_ADMIN_8.visible" value="true"/>
+              <entry key="BDY_ADMIN_8.zoomLevel" value="37500.0"/>
+              <entry key="BDY_ADMIN_9.color1" value="2023792800"/>
+              <entry key="BDY_ADMIN_9.labelZoom" value="7500.0"/>
+              <entry key="BDY_ADMIN_9.visible" value="true"/>
+              <entry key="BDY_ADMIN_9.zoomLevel" value="37500.0"/>
+              <entry key="BDY_COASTLINE.color1" value="-16711681"/>
+              <entry key="BDY_COASTLINE.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_COASTLINE.visible" value="true"/>
+              <entry key="BDY_COASTLINE.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_LANDUSE_FARM.color1" value="-16711936"/>
+              <entry key="BDY_LANDUSE_FARM.labelZoom" value="30000.0"/>
+              <entry key="BDY_LANDUSE_FARM.visible" value="true"/>
+              <entry key="BDY_LANDUSE_FARM.zoomLevel" value="150000.0"/>
+              <entry key="BDY_LANDUSE_FOREST.color1" value="-16731648"/>
+              <entry key="BDY_LANDUSE_FOREST.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_LANDUSE_FOREST.visible" value="true"/>
+              <entry key="BDY_LANDUSE_FOREST.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_LANDUSE_GREEN.color1" value="-16711936"/>
+              <entry key="BDY_LANDUSE_GREEN.labelZoom" value="30000.0"/>
+              <entry key="BDY_LANDUSE_GREEN.visible" value="true"/>
+              <entry key="BDY_LANDUSE_GREEN.zoomLevel" value="150000.0"/>
+              <entry key="BDY_LANDUSE_INDUSTRIAL.color1" value="1352704160"/>
+              <entry key="BDY_LANDUSE_INDUSTRIAL.labelZoom" value="3750.0"/>
+              <entry key="BDY_LANDUSE_INDUSTRIAL.visible" value="true"/>
+              <entry key="BDY_LANDUSE_INDUSTRIAL.zoomLevel" value="18750.0"/>
+              <entry key="BDY_LANDUSE_LANDFILL.checkSize" value="4"/>
+              <entry key="BDY_LANDUSE_LANDFILL.color1" value="1023410175"/>
+              <entry key="BDY_LANDUSE_LANDFILL.color2" value="1023410175"/>
+              <entry key="BDY_LANDUSE_LANDFILL.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_LANDUSE_LANDFILL.visible" value="true"/>
+              <entry key="BDY_LANDUSE_LANDFILL.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_MARITIME.color1" value="-16731470"/>
+              <entry key="BDY_MARITIME.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_MARITIME.visible" value="true"/>
+              <entry key="BDY_MARITIME.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_PARK.color1" value="-16711936"/>
+              <entry key="BDY_PARK.labelZoom" value="240000.0"/>
+              <entry key="BDY_PARK.visible" value="true"/>
+              <entry key="BDY_PARK.zoomLevel" value="1200000.0"/>
+              <entry key="BDY_PROTECTED_AREA.checkSize" value="4"/>
+              <entry key="BDY_PROTECTED_AREA.color1" value="1023410175"/>
+              <entry key="BDY_PROTECTED_AREA.color2" value="1023410175"/>
+              <entry key="BDY_PROTECTED_AREA.labelZoom" value="240000.0"/>
+              <entry key="BDY_PROTECTED_AREA.visible" value="true"/>
+              <entry key="BDY_PROTECTED_AREA.zoomLevel" value="1200000.0"/>
+              <entry key="BDY_SHORELINE.color1" value="-7706805"/>
+              <entry key="BDY_SHORELINE.labelZoom" value="3.4028235E38"/>
+              <entry key="BDY_SHORELINE.visible" value="true"/>
+              <entry key="BDY_SHORELINE.zoomLevel" value="3.4028235E38"/>
+              <entry key="BDY_SUBDIVISION.color1" value="2030042880"/>
+              <entry key="BDY_SUBDIVISION.labelZoom" value="1500.0"/>
+              <entry key="BDY_SUBDIVISION.visible" value="true"/>
+              <entry key="BDY_SUBDIVISION.zoomLevel" value="7500.0"/>
+              <entry key="BDY_UNKNOWN.checkSize" value="4"/>
+              <entry key="BDY_UNKNOWN.color1" value="1023410175"/>
+              <entry key="BDY_UNKNOWN.color2" value="1023410175"/>
+              <entry key="BDY_UNKNOWN.labelZoom" value="120000.0"/>
+              <entry key="BDY_UNKNOWN.visible" value="true"/>
+              <entry key="BDY_UNKNOWN.zoomLevel" value="600000.0"/>
+              <entry key="DONT_SHOW.color1" value="-5263566"/>
+              <entry key="DONT_SHOW.labelZoom" value="3.4028235E38"/>
+              <entry key="DONT_SHOW.visible" value="true"/>
+              <entry key="DONT_SHOW.zoomLevel" value="3.4028235E38"/>
+              <entry key="HWY_BRIDLEWAY.color1" value="-7706805"/>
+              <entry key="HWY_BRIDLEWAY.labelZoom" value="30000.0"/>
+              <entry key="HWY_BRIDLEWAY.visible" value="true"/>
+              <entry key="HWY_BRIDLEWAY.zoomLevel" value="150000.0"/>
+              <entry key="HWY_BUS_GUIDEWAY.color1" value="-5263566"/>
+              <entry key="HWY_BUS_GUIDEWAY.labelZoom" value="30000.0"/>
+              <entry key="HWY_BUS_GUIDEWAY.visible" value="true"/>
+              <entry key="HWY_BUS_GUIDEWAY.zoomLevel" value="150000.0"/>
+              <entry key="HWY_BYWAY.color1" value="-8355712"/>
+              <entry key="HWY_BYWAY.labelZoom" value="30000.0"/>
+              <entry key="HWY_BYWAY.visible" value="true"/>
+              <entry key="HWY_BYWAY.zoomLevel" value="150000.0"/>
+              <entry key="HWY_CONSTRUCTION.color1" value="-8355712"/>
+              <entry key="HWY_CONSTRUCTION.labelZoom" value="30000.0"/>
+              <entry key="HWY_CONSTRUCTION.visible" value="true"/>
+              <entry key="HWY_CONSTRUCTION.zoomLevel" value="150000.0"/>
+              <entry key="HWY_CYCLEWAY.color1" value="2017476672"/>
+              <entry key="HWY_CYCLEWAY.labelZoom" value="30000.0"/>
+              <entry key="HWY_CYCLEWAY.visible" value="true"/>
+              <entry key="HWY_CYCLEWAY.zoomLevel" value="150000.0"/>
+              <entry key="HWY_FOOTWAY.color1" value="2017476672"/>
+              <entry key="HWY_FOOTWAY.labelZoom" value="15000.0"/>
+              <entry key="HWY_FOOTWAY.visible" value="true"/>
+              <entry key="HWY_FOOTWAY.zoomLevel" value="75000.0"/>
+              <entry key="HWY_LIVING_STREET.color1" value="2021687424"/>
+              <entry key="HWY_LIVING_STREET.labelZoom" value="15000.0"/>
+              <entry key="HWY_LIVING_STREET.visible" value="true"/>
+              <entry key="HWY_LIVING_STREET.zoomLevel" value="75000.0"/>
+              <entry key="HWY_MOTORWAY.color1" value="-16777038"/>
+              <entry key="HWY_MOTORWAY.labelZoom" value="960000.0"/>
+              <entry key="HWY_MOTORWAY.visible" value="true"/>
+              <entry key="HWY_MOTORWAY.zoomLevel" value="4800000.0"/>
+              <entry key="HWY_MOTORWAY_LINK.color1" value="-16777038"/>
+              <entry key="HWY_MOTORWAY_LINK.labelZoom" value="120000.0"/>
+              <entry key="HWY_MOTORWAY_LINK.visible" value="true"/>
+              <entry key="HWY_MOTORWAY_LINK.zoomLevel" value="600000.0"/>
+              <entry key="HWY_PATH.color1" value="2021687424"/>
+              <entry key="HWY_PATH.labelZoom" value="15000.0"/>
+              <entry key="HWY_PATH.visible" value="true"/>
+              <entry key="HWY_PATH.zoomLevel" value="75000.0"/>
+              <entry key="HWY_PRIMARY.color1" value="-65536"/>
+              <entry key="HWY_PRIMARY.labelZoom" value="720000.0"/>
+              <entry key="HWY_PRIMARY.visible" value="true"/>
+              <entry key="HWY_PRIMARY.zoomLevel" value="3600000.0"/>
+              <entry key="HWY_PRIMARY_LINK.color1" value="-65536"/>
+              <entry key="HWY_PRIMARY_LINK.labelZoom" value="120000.0"/>
+              <entry key="HWY_PRIMARY_LINK.visible" value="true"/>
+              <entry key="HWY_PRIMARY_LINK.zoomLevel" value="600000.0"/>
+              <entry key="HWY_RACEWAY.color1" value="-5263566"/>
+              <entry key="HWY_RACEWAY.labelZoom" value="60000.0"/>
+              <entry key="HWY_RACEWAY.visible" value="true"/>
+              <entry key="HWY_RACEWAY.zoomLevel" value="300000.0"/>
+              <entry key="HWY_RESIDENTIAL.color1" value="2017476672"/>
+              <entry key="HWY_RESIDENTIAL.labelZoom" value="30000.0"/>
+              <entry key="HWY_RESIDENTIAL.visible" value="true"/>
+              <entry key="HWY_RESIDENTIAL.zoomLevel" value="150000.0"/>
+              <entry key="HWY_REST_AREA.color1" value="-16777038"/>
+              <entry key="HWY_REST_AREA.labelZoom" value="30000.0"/>
+              <entry key="HWY_REST_AREA.visible" value="true"/>
+              <entry key="HWY_REST_AREA.zoomLevel" value="150000.0"/>
+              <entry key="HWY_ROAD.color1" value="-5263566"/>
+              <entry key="HWY_ROAD.labelZoom" value="30000.0"/>
+              <entry key="HWY_ROAD.visible" value="true"/>
+              <entry key="HWY_ROAD.zoomLevel" value="150000.0"/>
+              <entry key="HWY_SECONDARY.color1" value="2017476672"/>
+              <entry key="HWY_SECONDARY.labelZoom" value="120000.0"/>
+              <entry key="HWY_SECONDARY.visible" value="true"/>
+              <entry key="HWY_SECONDARY.zoomLevel" value="600000.0"/>
+              <entry key="HWY_SECONDARY_LINK.color1" value="2017476672"/>
+              <entry key="HWY_SECONDARY_LINK.labelZoom" value="60000.0"/>
+              <entry key="HWY_SECONDARY_LINK.visible" value="true"/>
+              <entry key="HWY_SECONDARY_LINK.zoomLevel" value="300000.0"/>
+              <entry key="HWY_SERVICE.color1" value="2021687424"/>
+              <entry key="HWY_SERVICE.labelZoom" value="30000.0"/>
+              <entry key="HWY_SERVICE.visible" value="true"/>
+              <entry key="HWY_SERVICE.zoomLevel" value="150000.0"/>
+              <entry key="HWY_SERVICES.color1" value="-16777038"/>
+              <entry key="HWY_SERVICES.labelZoom" value="30000.0"/>
+              <entry key="HWY_SERVICES.visible" value="true"/>
+              <entry key="HWY_SERVICES.zoomLevel" value="150000.0"/>
+              <entry key="HWY_STEPS.color1" value="2017476672"/>
+              <entry key="HWY_STEPS.labelZoom" value="15000.0"/>
+              <entry key="HWY_STEPS.visible" value="true"/>
+              <entry key="HWY_STEPS.zoomLevel" value="75000.0"/>
+              <entry key="HWY_TERTIARY.color1" value="2017476672"/>
+              <entry key="HWY_TERTIARY.labelZoom" value="30000.0"/>
+              <entry key="HWY_TERTIARY.visible" value="true"/>
+              <entry key="HWY_TERTIARY.zoomLevel" value="150000.0"/>
+              <entry key="HWY_TRACK.color1" value="2022336331"/>
+              <entry key="HWY_TRACK.labelZoom" value="30000.0"/>
+              <entry key="HWY_TRACK.visible" value="true"/>
+              <entry key="HWY_TRACK.zoomLevel" value="150000.0"/>
+              <entry key="HWY_TRUNK.color1" value="-65536"/>
+              <entry key="HWY_TRUNK.labelZoom" value="480000.0"/>
+              <entry key="HWY_TRUNK.visible" value="true"/>
+              <entry key="HWY_TRUNK.zoomLevel" value="2400000.0"/>
+              <entry key="HWY_TRUNK_LINK.color1" value="-65536"/>
+              <entry key="HWY_TRUNK_LINK.labelZoom" value="120000.0"/>
+              <entry key="HWY_TRUNK_LINK.visible" value="true"/>
+              <entry key="HWY_TRUNK_LINK.zoomLevel" value="600000.0"/>
+              <entry key="HWY_UNCLASSIFIED.color1" value="-5263566"/>
+              <entry key="HWY_UNCLASSIFIED.labelZoom" value="30000.0"/>
+              <entry key="HWY_UNCLASSIFIED.visible" value="true"/>
+              <entry key="HWY_UNCLASSIFIED.zoomLevel" value="150000.0"/>
+              <entry key="NAT_GLACIER.color1" value="-16776961"/>
+              <entry key="NAT_GLACIER.labelZoom" value="3.4028235E38"/>
+              <entry key="NAT_GLACIER.visible" value="true"/>
+              <entry key="NAT_GLACIER.zoomLevel" value="3.4028235E38"/>
+              <entry key="NAT_WETLAND.labelZoom" value="240000.0"/>
+              <entry key="NAT_WETLAND.patternFile" value="images/osm-Rendering-area-natural-marsh-osmarender.png"/>
+              <entry key="NAT_WETLAND.visible" value="true"/>
+              <entry key="NAT_WETLAND.zoomLevel" value="1200000.0"/>
+              <entry key="PIPELINE.color1" value="-12566464"/>
+              <entry key="PIPELINE.labelZoom" value="180000.0"/>
+              <entry key="PIPELINE.visible" value="true"/>
+              <entry key="PIPELINE.zoomLevel" value="900000.0"/>
+              <entry key="PWR_LINE.color1" value="-8355712"/>
+              <entry key="PWR_LINE.labelZoom" value="30000.0"/>
+              <entry key="PWR_LINE.visible" value="true"/>
+              <entry key="PWR_LINE.zoomLevel" value="150000.0"/>
+              <entry key="RWY_DISUSED.color1" value="-8355712"/>
+              <entry key="RWY_DISUSED.labelZoom" value="60000.0"/>
+              <entry key="RWY_DISUSED.visible" value="true"/>
+              <entry key="RWY_DISUSED.zoomLevel" value="300000.0"/>
+              <entry key="RWY_LIGHT_RAIL.color1" value="-39936"/>
+              <entry key="RWY_LIGHT_RAIL.labelZoom" value="60000.0"/>
+              <entry key="RWY_LIGHT_RAIL.visible" value="true"/>
+              <entry key="RWY_LIGHT_RAIL.zoomLevel" value="300000.0"/>
+              <entry key="RWY_MONORAIL.color1" value="-12566464"/>
+              <entry key="RWY_MONORAIL.labelZoom" value="30000.0"/>
+              <entry key="RWY_MONORAIL.visible" value="true"/>
+              <entry key="RWY_MONORAIL.zoomLevel" value="150000.0"/>
+              <entry key="RWY_RAIL.color1" value="-16777216"/>
+              <entry key="RWY_RAIL.labelZoom" value="120000.0"/>
+              <entry key="RWY_RAIL.visible" value="true"/>
+              <entry key="RWY_RAIL.zoomLevel" value="600000.0"/>
+              <entry key="RWY_TRAM.color1" value="-12566464"/>
+              <entry key="RWY_TRAM.labelZoom" value="30000.0"/>
+              <entry key="RWY_TRAM.visible" value="true"/>
+              <entry key="RWY_TRAM.zoomLevel" value="150000.0"/>
+              <entry key="RWY_UNKNOWN.color1" value="-12566464"/>
+              <entry key="RWY_UNKNOWN.labelZoom" value="60000.0"/>
+              <entry key="RWY_UNKNOWN.visible" value="true"/>
+              <entry key="RWY_UNKNOWN.zoomLevel" value="300000.0"/>
+              <entry key="WWY_CANAL.color1" value="-16711681"/>
+              <entry key="WWY_CANAL.labelZoom" value="60000.0"/>
+              <entry key="WWY_CANAL.visible" value="true"/>
+              <entry key="WWY_CANAL.zoomLevel" value="300000.0"/>
+              <entry key="WWY_DITCH.color1" value="-16711681"/>
+              <entry key="WWY_DITCH.labelZoom" value="30000.0"/>
+              <entry key="WWY_DITCH.visible" value="true"/>
+              <entry key="WWY_DITCH.zoomLevel" value="150000.0"/>
+              <entry key="WWY_LAKE.color1" value="-16711681"/>
+              <entry key="WWY_LAKE.labelZoom" value="2000000.0"/>
+              <entry key="WWY_LAKE.visible" value="true"/>
+              <entry key="WWY_LAKE.zoomLevel" value="1.0E7"/>
+              <entry key="WWY_POND.color1" value="-16711681"/>
+              <entry key="WWY_POND.labelZoom" value="60000.0"/>
+              <entry key="WWY_POND.visible" value="true"/>
+              <entry key="WWY_POND.zoomLevel" value="300000.0"/>
+              <entry key="WWY_RAPIDS.color1" value="-16731470"/>
+              <entry key="WWY_RAPIDS.labelZoom" value="60000.0"/>
+              <entry key="WWY_RAPIDS.visible" value="true"/>
+              <entry key="WWY_RAPIDS.zoomLevel" value="300000.0"/>
+              <entry key="WWY_RIVER.color1" value="-16711681"/>
+              <entry key="WWY_RIVER.labelZoom" value="240000.0"/>
+              <entry key="WWY_RIVER.visible" value="true"/>
+              <entry key="WWY_RIVER.zoomLevel" value="1200000.0"/>
+              <entry key="WWY_RIVERBANK.color1" value="-16711681"/>
+              <entry key="WWY_RIVERBANK.labelZoom" value="480000.0"/>
+              <entry key="WWY_RIVERBANK.visible" value="true"/>
+              <entry key="WWY_RIVERBANK.zoomLevel" value="2400000.0"/>
+              <entry key="WWY_ROUTE.color1" value="-16777038"/>
+              <entry key="WWY_ROUTE.labelZoom" value="3.4028235E38"/>
+              <entry key="WWY_ROUTE.visible" value="true"/>
+              <entry key="WWY_ROUTE.zoomLevel" value="3.4028235E38"/>
+              <entry key="WWY_SEA.color1" value="-16711681"/>
+              <entry key="WWY_SEA.labelZoom" value="6.805647E37"/>
+              <entry key="WWY_SEA.visible" value="true"/>
+              <entry key="WWY_SEA.zoomLevel" value="3.4028235E38"/>
+              <entry key="WWY_STREAM.color1" value="-16711681"/>
+              <entry key="WWY_STREAM.labelZoom" value="60000.0"/>
+              <entry key="WWY_STREAM.visible" value="true"/>
+              <entry key="WWY_STREAM.zoomLevel" value="300000.0"/>
+              <entry key="WWY_UNKNOWN.color1" value="-16711681"/>
+              <entry key="WWY_UNKNOWN.labelZoom" value="3.4028235E38"/>
+              <entry key="WWY_UNKNOWN.visible" value="true"/>
+              <entry key="WWY_UNKNOWN.zoomLevel" value="3.4028235E38"/>
+              <entry key="WWY_WATERFALL.color1" value="-16731470"/>
+              <entry key="WWY_WATERFALL.labelZoom" value="60000.0"/>
+              <entry key="WWY_WATERFALL.visible" value="true"/>
+              <entry key="WWY_WATERFALL.zoomLevel" value="300000.0"/>
+            </map>
+          </node>
+          <node name="Windows">
+            <map>
+              <entry key="AX.25 Connected Sessions" value="53,297,845,223"/>
+              <entry key="GPS Status" value="25,262,481,411"/>
+              <entry key="Health Monitor for Stations" value="171,254,460,568"/>
+              <entry key="Heard Stations" value="202,563,418,175"/>
+              <entry key="Map" value="0,29,1600,842"/>
+              <entry key="Messages" value="431,300,738,300"/>
+              <entry key="Radio View" value="0,29,886,233"/>
+              <entry key="Telemetry Report" value="43,510,505,361"/>
+              <entry key="YAAC Plugins available for installation" value="0,29,853,566"/>
+            </map>
+          </node>
+        </node>
+      </node>
+    </node>
+  </root>
+</preferences>
