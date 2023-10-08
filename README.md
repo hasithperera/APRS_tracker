@@ -30,8 +30,8 @@ APRS ground testing.
 - First HAB flight on 01/10/2023
 - call: KE8TJE-11
 - data: [aprs.fi](https://aprs.fi/#!mt=roadmap&z=10&call=a%2FKE8TJE-11&timerange=21600&tail=21600)
-- commrnts: GPS module used worked well up to 11 km of altitude. above that it was unusable
-- more information avalable [here](https://docs.google.com/presentation/d/1fhy-rmdOGR4Q17i7Nnw9TJokxQfwU8tR1A3V_ZNNeEo/edit?usp=sharing) including flight data
+- comments: The GPS module used worked well up to 11 km of altitude. above that it was unusable
+- more information available [here](https://docs.google.com/presentation/d/1fhy-rmdOGR4Q17i7Nnw9TJokxQfwU8tR1A3V_ZNNeEo/edit?usp=sharing) including flight data
 
 ## Updates to the PCB
 
@@ -39,9 +39,9 @@ APRS ground testing.
 
 - [x] Update PCB based on v1.
 - know minor issues
-	- jumpers on the board needs to be larger
+	- jumpers on the board need to be larger
 
-### update: Ocutober 2023
+### update: October 2023
 
 - updated the GPS module
 
