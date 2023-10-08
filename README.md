@@ -25,6 +25,14 @@ APRS ground testing.
 
 <img src="./doc/aprs_test.png" width="50%" />
 
+### Flight testing
+
+- First HAB flight on 01/10/2023
+- call: KE8TJE-11
+- data: [aprs.fi](https://aprs.fi/#!mt=roadmap&z=10&call=a%2FKE8TJE-11&timerange=21600&tail=21600)
+- commrnts: GPS module used worked well up to 11 km of altitude. above that it was unusable
+- more information avalable [here](https://docs.google.com/presentation/d/1fhy-rmdOGR4Q17i7Nnw9TJokxQfwU8tR1A3V_ZNNeEo/edit?usp=sharing) including flight data
+
 ## Updates to the PCB
 
 ### update: 05/07/23
@@ -33,7 +41,11 @@ APRS ground testing.
 - know minor issues
 	- jumpers on the board needs to be larger
 
-<img src="./doc/aprs_PCB_v2.2.png" width="50%" />
+### update: Ocutober 2023
+
+- updated the GPS module
+
+<img src="./doc/aprs_v3.png" width="50%" />
 
 ## Todo list 
 
@@ -44,4 +56,4 @@ APRS ground testing.
 - [ ] i2c slave module to provide data to master 
 - [x] field testing 
 - [x] finalized PCB design 
-- [ ] long range testing at altitude 
+- [x] long range testing at altitude
