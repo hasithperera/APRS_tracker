@@ -1,0 +1,44 @@
+Partlist
+
+Exported from aprs_tracker_v3.brd at 10/9/23 8:44 AM
+
+EAGLE Version 9.6.2 Copyright (c) 1988-2020 Autodesk, Inc.
+
+Assembly variant: 
+
+Part             Value          Package       Library       Position (mil)        Orientation
+
+C3               4.7u           C050-024X044  rcl           (2610 1230)           R0
+C4               4.7u           C1206         rcl           (2609.37008 1325)     R0
+C5               10u            E5-6          rcl           (695 1175)            R180
+C6               100n           C050-024X044  rcl           (2900 1235)           R0
+C7               10u            E5-6          rcl           (1010 1165)           R270
+HC-06(BLUETOOTH)                1X04          pinhead       (1540 1245)           R0
+IC1              7805T          TO220H        adafruit      (1550 600)            MR270
+JP1                             2X02          pinhead       (360 1200)            MR180
+JP2                             1X02          pinhead       (1050 170)            R180
+LED1                            CHIP-LED0805  led           (3180 1130)           R270
+LED2                            CHIP-LED0805  led           (1200 160)            R180
+LED3                            CHIP-LED0805  led           (1305 1055)           R0
+LED4                            CHIP-LED0805  led           (1300 160)            R180
+PWR_IN                          1X02          pinhead       (2259.37008 1235)     R180
+R1               6.2k           0207/7        rcl           (750 645)             R180
+R2               2k             0207/7        rcl           (320 630)             R180
+R3               3.9k           0207/7        rcl           (805 760)             R180
+R4               270            0204/7        rcl           (150 920)             R90
+R5               1.2k           0207/7        rcl           (850 515)             R180
+R6               1k             0207/7        rcl           (380 490)             R180
+R7               1k             0207/7        rcl           (400 1030)            R180
+R8               1k             0207/7        rcl           (1580 1075)           R180
+R9               1k             RTRIM3339P    rcl           (1930 1160)           R270
+R10              1k             0207/7        rcl           (1970 880)            R0
+R11              1k             0207/7        rcl           (1550 170)            R180
+R12              330            R0805         rcl           (3360 1130)           R180
+R13              330            R0805         rcl           (865 85)              R0
+R14              330            R0805         rcl           (1215 1060)           R90
+R15              330            R0805         rcl           (1510 80)             R180
+T1               2N2222         TO92-EBC-OVAL adafruit      (2000 250)            R270
+U$1                             DRA818A       dorji         (2855 590)            MR90
+U$4              NANO-2         NANO-NOICSP   Arduino-clone (1350 700)            R90
+U1                              FGPMMOPA6H    adafruit      (2880 710)            R90
+X1               BU-SMA-V       BU-SMA-V      con-coax      (3870 670)            R0
