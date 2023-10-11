@@ -4,8 +4,15 @@ Standalone APRS tracker. This an Arduino-nano powered APRS tracker with a DRA818
 
 ## Progress
 
-- Fully functional PCB 
+- Fully functional PCB(v2) - tested up to 11 km in a HAB flight
 - Basic full operation was tested with the board externally powered. Refer the test section for details.
+- v3: Nearly complete PCB with new GPS module
+	- level shifter externally added using a 7404 
+
+### Firmware
+
+-[x] Bug fix for location packets
+-[ ] Support for GNSS GPS (Adafruit GPS)
 
 ## Testing 
 

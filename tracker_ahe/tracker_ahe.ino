@@ -24,6 +24,9 @@
 
 #define timeout 300
 
+#define freq_rx 144.978
+#define ctcss 146.2 
+
 //#define simulate 1
 
 
@@ -35,15 +38,15 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 // W8CUL location
-char Lat[] = "3938.76N";
-char Lon[] = "07958.40W";
+char Lat[] = "3938.76Nxx";
+char Lon[] = "07958.40Wxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 int time_share = 0;
 int msg_id = 0;
 int msg_valid = 0;
-char myCALL[] = "W8CUL";
-float freq;
+char myCALL[] = "KE8TJE";
+float freq_tx;
 
 
 void setup() {
@@ -60,18 +63,19 @@ void setup() {
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
-    freq = 145.390;
+    freq_tx = 145.390;
     Serial.println("[info] Alternate freq set");
   } else {
-    freq = 144.390;
+    freq_tx = 144.390;
     Serial.println("[info] APRS freq set");
   }
-  //start GPS
+  //start GPS 
   gps.begin(9600);
 
   //init radio module and change frequency
 
-  dra = DRA818::configure(dra_serial, DRA818_VHF, freq, freq, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
     Serial.println("[err ] RF init failed");
   } else {
@@ -104,6 +108,8 @@ void loop() {
         //simulate locked data
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+          // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
+          //
           Serial.println("[info] Sim Packet");
         }
         Serial.println(gps_raw);
@@ -146,12 +152,52 @@ void update_GPS(String gps_data) {
   //data is sent with 2 decimal places
   // reformat the data to be used by the APRS library
 
+  /*
   gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
   Lat[7] = char(gps_data.charAt(18));
   Serial.println(Lat);
 
   gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
   Lon[8] = char(gps_data.charAt(32));
+  Serial.println(Lon);
+  */
+  char test_data[100];
+  gps_data.toCharArray(test_data, 100);
+  
+  char *p = strtok(test_data, ",");  //code
+
+  //Process longitude
+  // bug fix for v2 (location packet)
+  p = strtok(NULL, ",");  //lat
+  sprintf(Lat, "%s", p);
+
+  // bug fix in v2
+  if (Lat[4] == '.') {
+    Lat[7] = '\0';
+  } else {
+    Lat[8] = '\0';
+  }
+  p = strtok(NULL, ",");  // lat_char
+  sprintf(Lat, "%s%s\0", Lat, p);
+
+  // Process latitude
+  // bug fix for v2 (location packet)
+  p = strtok(NULL, ",");  //lng
+  sprintf(Lon, "%s", p);
+
+  if (Lon[4] == '.') {
+    Lon[7] = '\0';
+  } else {
+    Lon[8] = '\0';
+  }
+
+  p = strtok(NULL, ",");  //dir
+  sprintf(Lon, "%s%s\0", Lon, p);
+
+  p = strtok(NULL, ",");  //state
+  sprintf(alt, "W8CUL Road Tripping:%s,", p);
+
+  Serial.println(Lat);
   Serial.println(Lon);
 
   
