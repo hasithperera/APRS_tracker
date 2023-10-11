@@ -42,7 +42,7 @@ char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 int time_share = 0;
 int msg_id = 0;
 int msg_valid = 0;
-char myCALL[] = "KE8TJE";
+char myCALL[] = "W8CUL";
 float freq;
 
 
@@ -50,7 +50,7 @@ void setup() {
 
   Serial.begin(9600);  // for logging
 
-  Serial.println("[info] WVU ERC - APRS tracker");
+  Serial.println("[info] KE8TJE - APRS tracker v2");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -175,7 +175,8 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
   
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"NEBP WV:%s,",p);
+  sprintf(alt,"W8CUL Road Tripping:%s,",p);
+  /*
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
   strcat(alt,",");
@@ -186,7 +187,7 @@ void update_GPS_alt(String gps_data) {
   strcat(alt,p);
   p = strtok(NULL, ",");    //alti-unit
   strcat(alt,p);
-
+  */
 
   msg_valid = 1;
 }
@@ -211,7 +212,7 @@ int location_update() {
 
   APRS_setPreamble(300);
 
-  APRS_setCallsign(myCALL, 11);
+  APRS_setCallsign(myCALL, 9);
   //9 - Mobile station
   //11 - Aircraft/Balloon
   //7 - Hand held
@@ -223,8 +224,12 @@ int location_update() {
   //APRS_setSymbol('S');
   // S - shuttle
   // < - Bike
+  //O - Balloon
+  //> - car
 
-  APRS_setSymbol('O');  //Balloon
+  APRS_setSymbol('>');  
+
+
   char comment[30];
   //delay(100);
   //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
