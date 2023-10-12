@@ -22,7 +22,8 @@
 #define RX 14  // arduino serial RX pin to the DRA818 TX pin
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
-#define timeout 300
+// old 300
+#define timeout 150
 
 #define freq_rx 144.978
 #define ctcss 146.2 
@@ -108,7 +109,13 @@ void loop() {
         //simulate locked data
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+          
+          // V2 - Packet
           // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
+
+          // V3 - Packet
+          // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
+          
           //
           Serial.println("[info] Sim Packet");
         }
@@ -163,6 +170,12 @@ void update_GPS(String gps_data) {
   */
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
+
+  // V2 - Packet
+  // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
+
+  // V3 - Packet
+  // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
   
   char *p = strtok(test_data, ",");  //code
 
@@ -195,7 +208,7 @@ void update_GPS(String gps_data) {
   sprintf(Lon, "%s%s\0", Lon, p);
 
   p = strtok(NULL, ",");  //state
-  sprintf(alt, "W8CUL Road Tripping:%s,", p);
+  sprintf(alt, "ARC Road Tripping:%s,", p);
 
   Serial.println(Lat);
   Serial.println(Lon);
@@ -221,7 +234,7 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
   
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"W8CUL Road Tripping:%s,",p);
+  sprintf(alt,"ARC Road Tripping:%s,",p);
   /*
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
