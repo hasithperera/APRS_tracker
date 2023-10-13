@@ -26,7 +26,9 @@
 #define timeout 150
 
 #define freq_rx 144.978
-#define ctcss 146.2 
+#define freq_main 146.550  //145.390
+
+#define ctcss 146.2
 
 //#define simulate 1
 
@@ -39,8 +41,8 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 // W8CUL location
-char Lat[] = "3938.76Nxx";
-char Lon[] = "07958.40Wxx";
+char Lat[] = "xxxx.xxNxx";
+char Lon[] = "xxxxx.xxWxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 int time_share = 0;
@@ -54,7 +56,7 @@ void setup() {
 
   Serial.begin(9600);  // for logging
 
-  Serial.println("[info] KE8TJE - APRS tracker v2");
+  Serial.println("[info] KE8TJE - APRS tracker v3 - Beta");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -64,13 +66,13 @@ void setup() {
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
-    freq_tx = 145.390;
+    freq_tx = 144.590;
     Serial.println("[info] Alternate freq set");
   } else {
-    freq_tx = 144.390;
+    freq_tx = freq_main;
     Serial.println("[info] APRS freq set");
   }
-  //start GPS 
+  //start GPS
   gps.begin(9600);
 
   //init radio module and change frequency
@@ -85,6 +87,7 @@ void setup() {
 }
 
 void loop() {
+
 
   gps.stopListening();
 
@@ -101,25 +104,30 @@ void loop() {
       time_share += 1;
       String gps_raw = gps.readStringUntil('\n');
 
+      //char test[100];
+      //gps_raw.toCharArray(test, 100);
+      //char *p = strtok(test, ",");  //code
+      //Serial.println(p);
       // all GPS packets are printed for debugging
       Serial.println(gps_raw);
 
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
-      if (gps_raw.substring(0, 6) == "$GPGLL") {
+      if (gps_raw.substring(0, 6) == "$GNRMC") {
         //simulate locked data
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
-          
+
           // V2 - Packet
           // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
 
           // V3 - Packet
           // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-          
+
           //
           Serial.println("[info] Sim Packet");
         }
         Serial.println(gps_raw);
+
 
         if (gps_raw.length() > 30) {
           msg_id++;
@@ -130,11 +138,13 @@ void loop() {
         }
       }
 
-      //long packet
+      //long packet - code
+      // v2 - "$GPGGA"
+      // v3 - "$GNGGA"
 
-
-      if (gps_raw.substring(0, 6) == "$GPGGA") {
+      if (gps_raw.substring(0, 6) == "$GNGGA") {
         //simulate locked data
+        Serial.println("Altitude packet");
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGGA,191757.00,3938.28486,N,07957.13511,W,1,03,2.71,274.5,M,-33.9,M,,*6F";
           Serial.println("[info] Sim Packet 2");
@@ -156,18 +166,7 @@ void loop() {
 
 void update_GPS(String gps_data) {
 
-  //data is sent with 2 decimal places
-  // reformat the data to be used by the APRS library
 
-  /*
-  gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
-  Lat[7] = char(gps_data.charAt(18));
-  Serial.println(Lat);
-
-  gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
-  Lon[8] = char(gps_data.charAt(32));
-  Serial.println(Lon);
-  */
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
 
@@ -176,11 +175,22 @@ void update_GPS(String gps_data) {
 
   // V3 - Packet
   // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-  
-  char *p = strtok(test_data, ",");  //code
 
+  char *p = strtok(test_data, ",");  //code
+  p = strtok(test_data, ",");        //time
+  p = strtok(test_data, ",");        //validifty
+
+  Serial.print("Data validity:");
+  Serial.println(p);
+  if (p == "A") {
+    Serial.println("[i] GPS valid");
+  } else {
+    Serial.println("[!] Invalid data");
+    return;
+  }
   //Process longitude
   // bug fix for v2 (location packet)
+
   p = strtok(NULL, ",");  //lat
   sprintf(Lat, "%s", p);
 
@@ -207,13 +217,14 @@ void update_GPS(String gps_data) {
   p = strtok(NULL, ",");  //dir
   sprintf(Lon, "%s%s\0", Lon, p);
 
-  p = strtok(NULL, ",");  //state
-  sprintf(alt, "ARC Road Tripping:%s,", p);
+  p = strtok(NULL, ",");  //gnd_speed_knots
+  p = strtok(NULL, ",");  //gnd_heading
+  sprintf(alt, "NEBP-h=%s", p);
 
   Serial.println(Lat);
   Serial.println(Lon);
 
-  
+
   msg_valid = 1;
 }
 
@@ -222,6 +233,8 @@ void update_GPS_alt(String gps_data) {
   //data is sent with 2 decimal places
   // reformat the data to be used by the APRS library
   //"$GPGGA,191757.00,3938.28486,N,07957.13511,W,1,03,2.71,274.5,M,-33.9,M,,*6F";
+  // v3
+  // $GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42
 
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
@@ -232,25 +245,22 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
   p = strtok(NULL, ",");             //lng
   p = strtok(NULL, ",");             //dir
-  
+
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"ARC Road Tripping:%s,",p);
-  /*
-  p = strtok(NULL, ",");    //sta-no
-  strcat(alt,p);
-  strcat(alt,",");
-  p = strtok(NULL, ",");    //horizontal
-  strcat(alt,p);
-  strcat(alt,",alt=");
-  p = strtok(NULL, ",");    //alti
-  strcat(alt,p);
-  p = strtok(NULL, ",");    //alti-unit
-  strcat(alt,p);
-  */
+  sprintf(alt, "NEBP,%s,", p);
+  p = strtok(NULL, ",");  //sta-no
+  strcat(alt, p);
+  strcat(alt, ",");
+  p = strtok(NULL, ",");  //horizontal
+  strcat(alt, p);
+  strcat(alt, ",alt=");
+  p = strtok(NULL, ",");  //alti
+  strcat(alt, p);
+  p = strtok(NULL, ",");  //alti-unit
+  strcat(alt, p);
 
   msg_valid = 1;
 }
-
 
 int location_update() {
   int wait = 400;
@@ -286,13 +296,19 @@ int location_update() {
   //O - Balloon
   //> - car
 
-  APRS_setSymbol('>');  
+  APRS_setSymbol('>');
 
 
   char comment[30];
   //delay(100);
   //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
   //APRS_sendLoc(comment, strlen(comment), ' ');
+
+  sprintf(alt, "%s,id=%d", alt, msg_id);
+
+  Serial.print("Packet info:");
+  Serial.println(alt);
+
   APRS_sendLoc(alt, strlen(alt), ' ');
 
   delay(1200);
