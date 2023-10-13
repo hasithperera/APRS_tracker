@@ -12,6 +12,7 @@
 /* Used Pins */
 #define radio_wake 16
 #define radio_ppt 13  //not needed
+
 #define radio_pwr 17
 #define alternate_freq 12
 #define radio_sql 2
@@ -28,12 +29,26 @@
 #define freq_rx 144.978
 #define ctcss 146.2 
 
+//APRS specification
+#define symbol 'O'
+#define SSID 11
+
+//APRS symbol
+  // S - shuttle
+  // < - Bike
+  //O - Balloon
+  //> - car
+
+// station SSID
+  // 9 - Mobile
+  // 11 - Spacecraft
+
 //#define simulate 1
 
 
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
-                             // the next frequency to scan
+
 String packetBuffer;
 SoftwareSerial gps(8, 10);  // RX, TX
 
@@ -94,7 +109,6 @@ void loop() {
     Serial.println("[info] ------------------------ No location data");
   }
   gps.listen();
-
 
   while (time_share < timeout) {
     while (gps.available() > 0) {
@@ -208,7 +222,7 @@ void update_GPS(String gps_data) {
   sprintf(Lon, "%s%s\0", Lon, p);
 
   p = strtok(NULL, ",");  //state
-  sprintf(alt, "ARC Road Tripping:%s,", p);
+  sprintf(alt, "NEBP:%s,", p);
 
   Serial.println(Lat);
   Serial.println(Lon);
@@ -234,8 +248,7 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
   
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"ARC Road Tripping:%s,",p);
-  /*
+  
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
   strcat(alt,",");
@@ -246,11 +259,10 @@ void update_GPS_alt(String gps_data) {
   strcat(alt,p);
   p = strtok(NULL, ",");    //alti-unit
   strcat(alt,p);
-  */
+  
 
   msg_valid = 1;
 }
-
 
 int location_update() {
   int wait = 400;
@@ -270,29 +282,16 @@ int location_update() {
   APRS_init();
 
   APRS_setPreamble(300);
-
-  APRS_setCallsign(myCALL, 9);
-  //9 - Mobile station
-  //11 - Aircraft/Balloon
-  //7 - Hand held
+  APRS_setCallsign(myCALL, SSID);  
 
   APRS_setLat(Lat);
   APRS_setLon(Lon);
 
-  // Icon - setting
-  //APRS_setSymbol('S');
-  // S - shuttle
-  // < - Bike
-  //O - Balloon
-  //> - car
+  // APRS icon - setting
+  APRS_setSymbol(symbol);  
 
-  APRS_setSymbol('>');  
-
-
-  char comment[30];
-  //delay(100);
-  //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
-  //APRS_sendLoc(comment, strlen(comment), ' ');
+  //add msg id:
+  sprintf(alt,",%d",msg_id++);
   APRS_sendLoc(alt, strlen(alt), ' ');
 
   delay(1200);
