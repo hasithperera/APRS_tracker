@@ -41,8 +41,8 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 // W8CUL location
-char Lat[] = "xxxx.xxNxx";
-char Lon[] = "xxxxx.xxWxx";
+char Lat[] = "3938.76Nxxx";
+char Lon[] = "07958.40Wxxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 int time_share = 0;
@@ -51,6 +51,7 @@ int msg_valid = 0;
 char myCALL[] = "KE8TJE";
 float freq_tx;
 
+int packet_id = 0;
 
 void setup() {
 
@@ -109,7 +110,7 @@ void loop() {
       //char *p = strtok(test, ",");  //code
       //Serial.println(p);
       // all GPS packets are printed for debugging
-      Serial.println(gps_raw);
+      //Serial.println(gps_raw);
 
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
       if (gps_raw.substring(0, 6) == "$GNRMC") {
@@ -217,14 +218,13 @@ void update_GPS(String gps_data) {
   p = strtok(NULL, ",");  //dir
   sprintf(Lon, "%s%s\0", Lon, p);
 
-  p = strtok(NULL, ",");  //gnd_speed_knots
-  p = strtok(NULL, ",");  //gnd_heading
-  sprintf(alt, "NEBP-h=%s", p);
-
+  p = strtok(NULL, ",");  //state
+  //sprintf(alt, "NEBP-WV ");
+  //Serial.println("Short packet:");
   Serial.println(Lat);
   Serial.println(Lon);
-
-
+  
+  
   msg_valid = 1;
 }
 
@@ -247,17 +247,19 @@ void update_GPS_alt(String gps_data) {
   p = strtok(NULL, ",");             //dir
 
   p = strtok(NULL, ",");  //state
-  sprintf(alt, "NEBP,%s,", p);
-  p = strtok(NULL, ",");  //sta-no
-  strcat(alt, p);
-  strcat(alt, ",");
-  p = strtok(NULL, ",");  //horizontal
-  strcat(alt, p);
-  strcat(alt, ",alt=");
-  p = strtok(NULL, ",");  //alti
-  strcat(alt, p);
-  p = strtok(NULL, ",");  //alti-unit
-  strcat(alt, p);
+  sprintf(alt,"NEBP-WV,");
+  
+  p = strtok(NULL, ",");    //sta-no
+  strcat(alt,p);
+  strcat(alt,",");
+  p = strtok(NULL, ",");    //horizontal
+  strcat(alt,p);
+  strcat(alt,",alt=");
+  p = strtok(NULL, ",");    //alti
+  strcat(alt,p);
+  p = strtok(NULL, ",");    //alti-unit
+  strcat(alt,p);
+  
 
   msg_valid = 1;
 }
@@ -281,7 +283,7 @@ int location_update() {
 
   APRS_setPreamble(300);
 
-  APRS_setCallsign(myCALL, 9);
+  APRS_setCallsign(myCALL, 11);
   //9 - Mobile station
   //11 - Aircraft/Balloon
   //7 - Hand held
@@ -296,7 +298,7 @@ int location_update() {
   //O - Balloon
   //> - car
 
-  APRS_setSymbol('>');
+  APRS_setSymbol('O');  
 
 
   char comment[30];
@@ -304,16 +306,12 @@ int location_update() {
   //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
   //APRS_sendLoc(comment, strlen(comment), ' ');
 
-  sprintf(alt, "%s,id=%d", alt, msg_id);
-
-  Serial.print("Packet info:");
-  Serial.println(alt);
-
+  sprintf(alt,"%s,%d",alt,packet_id++);
   APRS_sendLoc(alt, strlen(alt), ' ');
 
   delay(1200);
 
-  Serial.println("APRS:end");
+  Serial.println("[info] APRS:end");
   msg_valid = 0;
   //gps.flush();
 }
