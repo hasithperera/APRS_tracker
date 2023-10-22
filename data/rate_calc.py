@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 import pandas as pd
 
-file_MSU = './NEBP-2/flight-300234064701700-2023-10-01.csv'
+file_MSU = './HAB_launch-14_10_23/flight-300234064701700-2023-10-14.csv'
 df_msu = pd.read_csv(file_MSU)
 
 df_msu['fixed_dt']=pd.to_datetime(df_msu['datetime'], dayfirst=True)
@@ -51,6 +51,6 @@ for i in range(1,t.shape[0]-2):
 
 
 plt.figure()
-plt.plot(df_msu['altitude']/1000,dy/dt_s)
+plt.plot(df_msu['altitude']/1000,dy/dt_s,'o')
 plt.ylabel(r'V $(ms^{-1})$')
 plt.xlabel('alt (km)')

@@ -26,7 +26,7 @@
 #define timeout 150
 
 #define freq_rx 144.978
-#define freq_main 146.550  //145.390
+#define freq_main 144.390  //145.390
 
 #define ctcss 146.2
 
@@ -41,9 +41,9 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 // W8CUL location
-char Lat[] = "3938.76Nxxx";
-char Lon[] = "07958.40Wxxx";
-char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+char Lat[] = "xxxx.xxxxxx";
+char Lon[] = "xxxxx.xxxxxxxx";
+char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 int time_share = 0;
 int msg_id = 0;
@@ -94,6 +94,7 @@ void loop() {
 
   if (msg_id > 0 & msg_valid == 1) {
     location_update();
+    Serial.println("SEND APRS");
   } else {
     Serial.println("[info] ------------------------ No location data");
   }
@@ -104,13 +105,6 @@ void loop() {
     while (gps.available() > 0) {
       time_share += 1;
       String gps_raw = gps.readStringUntil('\n');
-
-      //char test[100];
-      //gps_raw.toCharArray(test, 100);
-      //char *p = strtok(test, ",");  //code
-      //Serial.println(p);
-      // all GPS packets are printed for debugging
-      //Serial.println(gps_raw);
 
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
       if (gps_raw.substring(0, 6) == "$GNRMC") {
@@ -127,13 +121,14 @@ void loop() {
           //
           Serial.println("[info] Sim Packet");
         }
-        Serial.println(gps_raw);
+
+        //Serial.println(gps_raw);
 
 
         if (gps_raw.length() > 30) {
           msg_id++;
           // GPS locked
-          update_GPS(gps_raw);
+          //update_GPS(gps_raw);
 
           //i2c functions needed
         }
@@ -142,7 +137,16 @@ void loop() {
       //long packet - code
       // v2 - "$GPGGA"
       // v3 - "$GNGGA"
-
+      //Serial.println(gps_raw);
+      if (gps_raw.substring(0, 6) == "$GNGGA"){
+        
+        // debug packet
+        //gps_raw = "$GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42";
+        
+        Serial.println(gps_raw);
+        update_GPS_alt(gps_raw);
+      }
+/*
       if (gps_raw.substring(0, 6) == "$GNGGA") {
         //simulate locked data
         Serial.println("Altitude packet");
@@ -156,10 +160,10 @@ void loop() {
           msg_id++;
           // GPS locked
           update_GPS_alt(gps_raw);
-
-          //i2c functions needed
         }
       }
+      */
+      
     }
   }
   time_share = 0;
@@ -178,12 +182,13 @@ void update_GPS(String gps_data) {
   // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
 
   char *p = strtok(test_data, ",");  //code
-  p = strtok(test_data, ",");        //time
-  p = strtok(test_data, ",");        //validifty
+  p = strtok(NULL,","); //time
+  p = strtok(NULL,","); //validifty
 
-  Serial.print("Data validity:");
-  Serial.println(p);
-  if (p == "A") {
+  //Serial.print("Data validity:");
+  //Serial.println(p);
+
+  if (p[0]=='A') {
     Serial.println("[i] GPS valid");
   } else {
     Serial.println("[!] Invalid data");
@@ -241,13 +246,39 @@ void update_GPS_alt(String gps_data) {
 
   char *p = strtok(test_data, ",");  //code
   p = strtok(NULL, ",");             //time
+
+
   p = strtok(NULL, ",");             //lat
-  p = strtok(NULL, ",");             //dir
-  p = strtok(NULL, ",");             //lng
-  p = strtok(NULL, ",");             //dir
+  sprintf(Lat, "%s", p);
+
+  // bug fix in v2
+  if (Lat[4] == '.') {
+    Lat[7] = '\0';
+  } else {
+    Lat[8] = '\0';
+  }
+
+  
+  p = strtok(NULL, ",");  // lat_char
+  sprintf(Lat, "%s%s\0", Lat, p);
+
+  //p = strtok(NULL, ",");             //lng
+  //p = strtok(NULL, ",");             //dir
+
+  p = strtok(NULL, ",");  //lng
+  sprintf(Lon, "%s", p);
+
+  if (Lon[4] == '.') {
+    Lon[7] = '\0';
+  } else {
+    Lon[8] = '\0';
+  }
+
+  p = strtok(NULL, ",");  //dir
+  sprintf(Lon, "%s%s\0", Lon, p);
 
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"NEBP-WV,");
+  sprintf(alt,"ARC Roadtripping,");
   
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
@@ -283,7 +314,7 @@ int location_update() {
 
   APRS_setPreamble(300);
 
-  APRS_setCallsign(myCALL, 11);
+  APRS_setCallsign(myCALL, 9);
   //9 - Mobile station
   //11 - Aircraft/Balloon
   //7 - Hand held
@@ -298,7 +329,7 @@ int location_update() {
   //O - Balloon
   //> - car
 
-  APRS_setSymbol('O');  
+  APRS_setSymbol('>');  
 
 
   char comment[30];
@@ -312,6 +343,7 @@ int location_update() {
   delay(1200);
 
   Serial.println("[info] APRS:end");
+  Serial.println(alt);
   msg_valid = 0;
   //gps.flush();
 }
