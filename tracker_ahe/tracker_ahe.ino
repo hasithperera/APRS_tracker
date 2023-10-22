@@ -27,7 +27,9 @@
 #define timeout 150
 
 #define freq_rx 144.978
-#define ctcss 146.2 
+#define freq_main 144.390  //145.390
+
+#define ctcss 146.2
 
 //APRS specification
 #define symbol 'O'
@@ -54,9 +56,9 @@ SoftwareSerial gps(8, 10);  // RX, TX
 
 
 // W8CUL location
-char Lat[] = "3938.76Nxx";
-char Lon[] = "07958.40Wxx";
-char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+char Lat[] = "xxxx.xxxxxx";
+char Lon[] = "xxxxx.xxxxxxxx";
+char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 char final_msg[100];
 
@@ -66,12 +68,17 @@ int msg_valid = 0;
 char myCALL[] = "KE8TJE";
 float freq_tx;
 
+int packet_id = 0;
 
 void setup() {
 
   Serial.begin(9600);  // for logging
 
+<<<<<<< HEAD
   Serial.println("[info] KE8TJE - APRS tracker v3.0");
+=======
+  Serial.println("[info] KE8TJE - APRS tracker v3 - Beta");
+>>>>>>> aprs_v3
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -81,13 +88,13 @@ void setup() {
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
-    freq_tx = 145.390;
+    freq_tx = 144.590;
     Serial.println("[info] Alternate freq set");
   } else {
-    freq_tx = 144.390;
+    freq_tx = freq_main;
     Serial.println("[info] APRS freq set");
   }
-  //start GPS 
+  //start GPS
   gps.begin(9600);
 
   //init radio module and change frequency
@@ -103,10 +110,12 @@ void setup() {
 
 void loop() {
 
+
   gps.stopListening();
 
   if (msg_id > 0 & msg_valid == 1) {
     location_update();
+    Serial.println("SEND APRS");
   } else {
     Serial.println("[info] ------------------------ No location data");
   }
@@ -117,40 +126,66 @@ void loop() {
       time_share += 1;
       String gps_raw = gps.readStringUntil('\n');
 
+<<<<<<< HEAD
       // all GPS packets are printed for debugging
       //Serial.println(gps_raw);
 
+=======
+>>>>>>> aprs_v3
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
       if (gps_raw.substring(0, 6) == "$GNRMC") {
         //simulate locked data
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
-          
+
           // V2 - Packet
           // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
 
           // V3 - Packet
           // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-          
+
           //
           Serial.println("[info] Sim Packet");
         }
+<<<<<<< HEAD
         //Serial.println(gps_raw);
+=======
+
+        //Serial.println(gps_raw);
+
+>>>>>>> aprs_v3
 
         if (gps_raw.length() > 30) {
           msg_id++;
           // GPS locked
-          update_GPS(gps_raw);
+          //update_GPS(gps_raw);
 
           //i2c functions needed
         }
       }
 
+<<<<<<< HEAD
       //long packet
 
 
+=======
+      //long packet - code
+      // v2 - "$GPGGA"
+      // v3 - "$GNGGA"
+      //Serial.println(gps_raw);
+      if (gps_raw.substring(0, 6) == "$GNGGA"){
+        
+        // debug packet
+        //gps_raw = "$GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42";
+        
+        Serial.println(gps_raw);
+        update_GPS_alt(gps_raw);
+      }
+/*
+>>>>>>> aprs_v3
       if (gps_raw.substring(0, 6) == "$GNGGA") {
         //simulate locked data
+        Serial.println("Altitude packet");
         if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GPGGA,191757.00,3938.28486,N,07957.13511,W,1,03,2.71,274.5,M,-33.9,M,,*6F";
           Serial.println("[info] Sim Packet 2");
@@ -161,11 +196,16 @@ void loop() {
           msg_id++;
           // GPS locked
           update_GPS_alt(gps_raw);
+<<<<<<< HEAD
           Serial.println(alt);
 
           //i2c functions needed
+=======
+>>>>>>> aprs_v3
         }
       }
+      */
+      
     }
   }
   time_share = 0;
@@ -173,18 +213,7 @@ void loop() {
 
 void update_GPS(String gps_data) {
 
-  //data is sent with 2 decimal places
-  // reformat the data to be used by the APRS library
 
-  /*
-  gps_data.substring(7, 7 + 8).toCharArray(Lat, 8);
-  Lat[7] = char(gps_data.charAt(18));
-  Serial.println(Lat);
-
-  gps_data.substring(20, 20 + 12).toCharArray(Lon, 10);
-  Lon[8] = char(gps_data.charAt(32));
-  Serial.println(Lon);
-  */
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
 
@@ -193,13 +222,28 @@ void update_GPS(String gps_data) {
 
   // V3 - Packet
   // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-  
+
   char *p = strtok(test_data, ",");  //code
+<<<<<<< HEAD
   p = strtok(NULL, ",");  //time
   p = strtok(NULL, ",");  //validity
+=======
+  p = strtok(NULL,","); //time
+  p = strtok(NULL,","); //validifty
+>>>>>>> aprs_v3
 
+  //Serial.print("Data validity:");
+  //Serial.println(p);
+
+  if (p[0]=='A') {
+    Serial.println("[i] GPS valid");
+  } else {
+    Serial.println("[!] Invalid data");
+    return;
+  }
   //Process longitude
   // bug fix for v2 (location packet)
+
   p = strtok(NULL, ",");  //lat
   sprintf(Lat, "%s", p);
 
@@ -227,11 +271,19 @@ void update_GPS(String gps_data) {
   sprintf(Lon, "%s%s\0", Lon, p);
 
   p = strtok(NULL, ",");  //state
+<<<<<<< HEAD
   sprintf(alt, "NEBP:%s,", p);
 
   //Serial.println(Lat);
   //Serial.println(Lon);
 
+=======
+  //sprintf(alt, "NEBP-WV ");
+  //Serial.println("Short packet:");
+  Serial.println(Lat);
+  Serial.println(Lon);
+  
+>>>>>>> aprs_v3
   
   msg_valid = 1;
 }
@@ -241,20 +293,55 @@ void update_GPS_alt(String gps_data) {
   //data is sent with 2 decimal places
   // reformat the data to be used by the APRS library
   //"$GPGGA,191757.00,3938.28486,N,07957.13511,W,1,03,2.71,274.5,M,-33.9,M,,*6F";
+<<<<<<< HEAD
   //$GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*
 
+=======
+  // v3
+  // $GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42
+>>>>>>> aprs_v3
 
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
 
   char *p = strtok(test_data, ",");  //code
   p = strtok(NULL, ",");             //time
+
+
   p = strtok(NULL, ",");             //lat
-  p = strtok(NULL, ",");             //dir
-  p = strtok(NULL, ",");             //lng
-  p = strtok(NULL, ",");             //dir
+  sprintf(Lat, "%s", p);
+
+  // bug fix in v2
+  if (Lat[4] == '.') {
+    Lat[7] = '\0';
+  } else {
+    Lat[8] = '\0';
+  }
+
   
+  p = strtok(NULL, ",");  // lat_char
+  sprintf(Lat, "%s%s\0", Lat, p);
+
+  //p = strtok(NULL, ",");             //lng
+  //p = strtok(NULL, ",");             //dir
+
+  p = strtok(NULL, ",");  //lng
+  sprintf(Lon, "%s", p);
+
+  if (Lon[4] == '.') {
+    Lon[7] = '\0';
+  } else {
+    Lon[8] = '\0';
+  }
+
+  p = strtok(NULL, ",");  //dir
+  sprintf(Lon, "%s%s\0", Lon, p);
+
   p = strtok(NULL, ",");  //state
+<<<<<<< HEAD
+=======
+  sprintf(alt,"ARC Roadtripping,");
+>>>>>>> aprs_v3
   
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
@@ -266,6 +353,10 @@ void update_GPS_alt(String gps_data) {
   strcat(alt,p);
   p = strtok(NULL, ",");    //alti-unit
   strcat(alt,p);
+<<<<<<< HEAD
+=======
+  
+>>>>>>> aprs_v3
 
   //Serial.print("alt len:");
   //strcpy(alt,final_msg);
@@ -299,16 +390,29 @@ int location_update() {
   // APRS icon - setting
   APRS_setSymbol(symbol);  
 
+<<<<<<< HEAD
   //add msg id:
   
+=======
+  char comment[30];
+  //delay(100);
+  //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
+  //APRS_sendLoc(comment, strlen(comment), ' ');
+
+  sprintf(alt,"%s,%d",alt,packet_id++);
+>>>>>>> aprs_v3
   APRS_sendLoc(alt, strlen(alt), ' ');
   
 
   delay(1200);
 
   Serial.println("[info] APRS:end");
+<<<<<<< HEAD
   Serial.println(final_msg);
 
+=======
+  Serial.println(alt);
+>>>>>>> aprs_v3
   msg_valid = 0;
   //gps.flush();
 }
