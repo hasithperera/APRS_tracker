@@ -128,13 +128,21 @@
                 "file": "data/DTMF/DTMF - Test.md"
               }
             }
+          },
+          {
+            "id": "bb640cba578e6a36",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 554.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -148,6 +156,7 @@
   },
   "active": "841ac14879edf7c1",
   "lastOpenFiles": [
+    "data/DTMF/DTMF - Test.md",
     "data/untitled folder",
     "data/DTMF/ALL0007/F0007TEK.SET",
     "data/DTMF/ALL0007/F0007CH3.CSV",
@@ -156,7 +165,6 @@
     "data/DTMF/ALL0007/F0007CH1.CSV",
     "data/DTMF/ALL0007",
     "data/README.md",
-    "data/DTMF/DTMF - Test.md",
     "Manual.md",
     "README.md",
     "data/res"
