@@ -11,5 +11,12 @@ To make this platform capable of using DTMF commands the audio from the radio (D
 	- Purple - Audio output from FT530 (standard radio)
 - DTMF tones - 0,1,3 
 	
-	![F0007TEK](ALL0007/F0007TEK.JPG)
-- tones are generated using audacity 
+	![F0007TEK| 320](ALL0007/F0007TEK.JPG)
+- tones are generated using audacity
+- **This was audible using a head phone.** It might work without any modifications
+
+### Todo
+
+- [ ] Design a schematic for MT88700
+
+

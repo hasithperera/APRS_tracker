@@ -142,7 +142,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 554.5
+    "width": 382.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -154,10 +154,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "841ac14879edf7c1",
+  "active": "bb640cba578e6a36",
   "lastOpenFiles": [
-    "data/DTMF/ALL0007/F0007TEK.JPG",
     "data/DTMF/DTMF - Test.md",
+    "data/DTMF/ALL0007/F0007TEK.JPG",
     "data/untitled folder",
     "data/DTMF/ALL0007/F0007TEK.SET",
     "data/DTMF/ALL0007/F0007CH3.CSV",
