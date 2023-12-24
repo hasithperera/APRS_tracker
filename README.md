@@ -11,8 +11,8 @@ Standalone APRS tracker. This an Arduino-nano powered APRS tracker with a DRA818
 
 ### Firmware
 
--[x] Bug fix for location packets
--[ ] Support for GNSS GPS (Adafruit GPS)
+- [x] Bug fix for location packets
+- [x] Support for GNSS GPS (Adafruit GPS)
 
 ## Testing 
 
@@ -30,7 +30,7 @@ The following command was used to run the iGate
 
 APRS ground testing.
 
-<img src="./doc/aprs_test.png" width="50%" />
+![aprs_test|500](doc/aprs_test.png)
 
 ### Flight testing
 
@@ -52,8 +52,7 @@ APRS ground testing.
 
 - updated the GPS module
 
-<img src="./doc/aprs_v3.png" width="50%" />
-
+![aprs_v3](doc/aprs_v3.png)
 ## Todo list 
 
 - [x] interface GPS sensor
