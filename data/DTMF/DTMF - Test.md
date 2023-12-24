@@ -15,8 +15,13 @@ To make this platform capable of using DTMF commands the audio from the radio (D
 - tones are generated using audacity
 - **This was audible using a head phone.** It might work without any modifications
 
+### 24/12/2023
+
+- a gain of 4 on the pre-amp worked out well from lab testing. It would be better to add a pot to have a rage of gain we can tune on the final board 
+- use a Attiny84 to send commands to the radio 
+- StD pin should be mounted as an interrupt pin on the attiny  
 ### Todo
 
-- [ ] Design a schematic for MT88700
-
+- [x] Test a schematic for MT8870
+- [ ] PCB desing
 
