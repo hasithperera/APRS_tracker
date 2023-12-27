@@ -20,8 +20,24 @@ To make this platform capable of using DTMF commands the audio from the radio (D
 - a gain of 4 on the pre-amp worked out well from lab testing. It would be better to add a pot to have a rage of gain we can tune on the final board 
 - use a Attiny84 to send commands to the radio 
 - StD pin should be mounted as an interrupt pin on the attiny  
+
+### 25/12/2023
+
+Interface pin list between APRS and DTMF boards
+ - 5 v
+ - 3.3 v
+ - GND x 2
+ - Battery in
+ - Audio  in 
+ - i2c pins - (SCL/SDA)
+ - optional x 2 for future use - Potentially to kill the PhaT module after landing
+	Total of 10 pins. 5x2 connector specification as shown below
+	
+	![|200](../../Pasted%20image%2020231225124723.png)
+
+
 ### Todo
 
 - [x] Test a schematic for MT8870
-- [ ] PCB desing
+- [ ] PCB design
 

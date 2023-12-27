@@ -142,7 +142,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 382.5
+    "width": 267.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -154,8 +154,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bb640cba578e6a36",
+  "active": "841ac14879edf7c1",
   "lastOpenFiles": [
+    "PCB/lib/ATS080B-E.lbr",
+    "Pasted image 20231225124723.png",
     "data/DTMF/DTMF - Test.md",
     "data/DTMF/ALL0007/F0007TEK.JPG",
     "data/untitled folder",
