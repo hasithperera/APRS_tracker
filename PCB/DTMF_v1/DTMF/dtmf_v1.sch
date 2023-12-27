@@ -600,6 +600,60 @@ Source: &lt;a href="http://www.microsemi.com/document-portal/doc_download/127041
 <rectangle x1="-1.651" y1="-2.921" x2="-0.889" y2="-1.905" layer="21"/>
 <rectangle x1="0.889" y1="-2.921" x2="1.651" y2="-1.905" layer="21"/>
 </package>
+<package name="2X02" urn="urn:adsk.eagle:footprint:22337/1" library_version="4">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-2.54" y1="-1.905" x2="-1.905" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-2.54" x2="0" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="-1.905" x2="0.635" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-2.54" x2="2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-1.905" x2="-2.54" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="1.905" x2="-1.905" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="2.54" x2="-0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="2.54" x2="0" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="1.905" x2="0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="2.54" x2="1.905" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="2.54" x2="2.54" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="1.905" x2="0" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="1.905" x2="2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-2.54" x2="1.905" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-2.54" x2="-0.635" y2="-2.54" width="0.1524" layer="21"/>
+<pad name="1" x="-1.27" y="-1.27" drill="1.016" shape="octagon"/>
+<pad name="2" x="-1.27" y="1.27" drill="1.016" shape="octagon"/>
+<pad name="3" x="1.27" y="-1.27" drill="1.016" shape="octagon"/>
+<pad name="4" x="1.27" y="1.27" drill="1.016" shape="octagon"/>
+<text x="-2.54" y="3.175" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-4.445" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.524" y1="-1.524" x2="-1.016" y2="-1.016" layer="51"/>
+<rectangle x1="-1.524" y1="1.016" x2="-1.016" y2="1.524" layer="51"/>
+<rectangle x1="1.016" y1="1.016" x2="1.524" y2="1.524" layer="51"/>
+<rectangle x1="1.016" y1="-1.524" x2="1.524" y2="-1.016" layer="51"/>
+</package>
+<package name="2X02/90" urn="urn:adsk.eagle:footprint:22338/1" library_version="4">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-2.54" y1="-1.905" x2="0" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="-1.905" x2="0" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="-2.54" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="6.985" x2="-1.27" y2="1.27" width="0.762" layer="21"/>
+<wire x1="0" y1="-1.905" x2="2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.635" x2="0" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="6.985" x2="1.27" y2="1.27" width="0.762" layer="21"/>
+<pad name="2" x="-1.27" y="-3.81" drill="1.016" shape="octagon"/>
+<pad name="4" x="1.27" y="-3.81" drill="1.016" shape="octagon"/>
+<pad name="1" x="-1.27" y="-6.35" drill="1.016" shape="octagon"/>
+<pad name="3" x="1.27" y="-6.35" drill="1.016" shape="octagon"/>
+<text x="-3.175" y="-3.81" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="4.445" y="-3.81" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<rectangle x1="-1.651" y1="0.635" x2="-0.889" y2="1.143" layer="21"/>
+<rectangle x1="0.889" y1="0.635" x2="1.651" y2="1.143" layer="21"/>
+<rectangle x1="-1.651" y1="-2.921" x2="-0.889" y2="-1.905" layer="21"/>
+<rectangle x1="0.889" y1="-2.921" x2="1.651" y2="-1.905" layer="21"/>
+<rectangle x1="-1.651" y1="-5.461" x2="-0.889" y2="-4.699" layer="21"/>
+<rectangle x1="-1.651" y1="-4.699" x2="-0.889" y2="-2.921" layer="51"/>
+<rectangle x1="0.889" y1="-4.699" x2="1.651" y2="-2.921" layer="51"/>
+<rectangle x1="0.889" y1="-5.461" x2="1.651" y2="-4.699" layer="21"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="2X05" urn="urn:adsk.eagle:package:22470/2" type="model" library_version="4">
@@ -636,6 +690,18 @@ Source: &lt;a href="http://www.microsemi.com/document-portal/doc_download/127041
 <description>PIN HEADER</description>
 <packageinstances>
 <packageinstance name="1X02/90"/>
+</packageinstances>
+</package3d>
+<package3d name="2X02" urn="urn:adsk.eagle:package:22455/2" type="model" library_version="4">
+<description>PIN HEADER</description>
+<packageinstances>
+<packageinstance name="2X02"/>
+</packageinstances>
+</package3d>
+<package3d name="2X02/90" urn="urn:adsk.eagle:package:22456/2" type="model" library_version="4">
+<description>PIN HEADER</description>
+<packageinstances>
+<packageinstance name="2X02/90"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -681,6 +747,18 @@ Source: &lt;a href="http://www.microsemi.com/document-portal/doc_download/127041
 <text x="-6.35" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="1" x="-2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="2" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
+</symbol>
+<symbol name="PINH2X2" urn="urn:adsk.eagle:symbol:22336/1" library_version="4">
+<wire x1="-8.89" y1="-2.54" x2="6.35" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="6.35" y1="-2.54" x2="6.35" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="6.35" y1="5.08" x2="-8.89" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="-8.89" y1="5.08" x2="-8.89" y2="-2.54" width="0.4064" layer="94"/>
+<text x="-8.89" y="5.715" size="1.778" layer="95">&gt;NAME</text>
+<text x="-8.89" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="-5.08" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
+<pin name="2" x="2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot" rot="R180"/>
+<pin name="3" x="-5.08" y="0" visible="pad" length="short" direction="pas" function="dot"/>
+<pin name="4" x="2.54" y="0" visible="pad" length="short" direction="pas" function="dot" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -811,6 +889,46 @@ Source: &lt;a href="http://www.microsemi.com/document-portal/doc_download/127041
 <technologies>
 <technology name="">
 <attribute name="POPULARITY" value="24" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="PINHD-2X2" urn="urn:adsk.eagle:component:22526/4" prefix="JP" uservalue="yes" library_version="4">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<gates>
+<gate name="A" symbol="PINH2X2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="2X02">
+<connects>
+<connect gate="A" pin="1" pad="1"/>
+<connect gate="A" pin="2" pad="2"/>
+<connect gate="A" pin="3" pad="3"/>
+<connect gate="A" pin="4" pad="4"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:22455/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="/90" package="2X02/90">
+<connects>
+<connect gate="A" pin="1" pad="1"/>
+<connect gate="A" pin="2" pad="2"/>
+<connect gate="A" pin="3" pad="3"/>
+<connect gate="A" pin="4" pad="4"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:22456/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -11277,7 +11395,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="ICSP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X3" device="" package3d_urn="urn:adsk.eagle:package:22462/2"/>
-<part name="USER_IN_2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
 <part name="L5" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
 <part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="330"/>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -11286,6 +11403,7 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="TP4" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2" value="PTR1B1,27"/>
 <part name="TP5" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2" value="PTR1B1,27"/>
 <part name="TP7" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2" value="PTR1B1,27"/>
+<part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X2" device="" package3d_urn="urn:adsk.eagle:package:22455/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -11398,8 +11516,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <attribute name="NAME" x="-11.6586" y="24.13" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="-6.858" y="24.13" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P+5" gate="VCC" x="55.88" y="25.4" smashed="yes">
-<attribute name="VALUE" x="53.34" y="22.86" size="1.778" layer="96" rot="R90"/>
+<instance part="P+5" gate="VCC" x="58.42" y="35.56" smashed="yes">
+<attribute name="VALUE" x="55.88" y="33.02" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="GND7" gate="1" x="55.88" y="5.08" smashed="yes">
 <attribute name="VALUE" x="53.34" y="2.54" size="1.778" layer="96"/>
@@ -11407,10 +11525,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <instance part="ICSP1" gate="A" x="45.72" y="12.7" smashed="yes">
 <attribute name="NAME" x="39.37" y="18.415" size="1.778" layer="95"/>
 <attribute name="VALUE" x="39.37" y="5.08" size="1.778" layer="96"/>
-</instance>
-<instance part="USER_IN_2" gate="G$1" x="134.62" y="25.4" smashed="yes" rot="R270">
-<attribute name="NAME" x="130.81" y="20.955" size="1.778" layer="95"/>
-<attribute name="VALUE" x="129.54" y="31.75" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="L5" gate="G$1" x="60.96" y="71.12" smashed="yes" rot="R90">
 <attribute name="NAME" x="65.532" y="74.676" size="1.778" layer="95" rot="R180"/>
@@ -11442,6 +11556,10 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <instance part="TP7" gate="G$1" x="60.96" y="78.74" smashed="yes" rot="R90">
 <attribute name="NAME" x="67.31" y="77.724" size="1.778" layer="95" rot="R180"/>
 <attribute name="TP_SIGNAL_NAME" x="63.5" y="80.01" size="1.778" layer="97" rot="R90"/>
+</instance>
+<instance part="JP2" gate="A" x="137.16" y="17.78" smashed="yes">
+<attribute name="NAME" x="128.27" y="23.495" size="1.778" layer="95"/>
+<attribute name="VALUE" x="128.27" y="12.7" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -11490,11 +11608,11 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <pinref part="IC1" gate="G$1" pin="(PCINT6/OC1A/SDA/MOSI/DI/ADC6)_PA6"/>
 <label x="5.08" y="43.18" size="0.8128" layer="95" rot="R180" xref="yes"/>
 <wire x1="15.24" y1="43.18" x2="5.08" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="43.18" x2="15.24" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="30.48" x2="63.5" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="43.18" x2="15.24" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="27.94" x2="63.5" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="ICSP1" gate="A" pin="4"/>
 <wire x1="50.8" y1="12.7" x2="63.5" y2="12.7" width="0.1524" layer="91"/>
-<wire x1="63.5" y1="12.7" x2="63.5" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="12.7" x2="63.5" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="AUDIO" class="0">
@@ -11613,9 +11731,9 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </segment>
 <segment>
 <pinref part="ICSP1" gate="A" pin="2"/>
-<wire x1="50.8" y1="15.24" x2="55.88" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="15.24" x2="58.42" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="P+5" gate="VCC" pin="VCC"/>
-<wire x1="55.88" y1="15.24" x2="55.88" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="15.24" x2="58.42" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="NC1" class="0">
@@ -11819,14 +11937,20 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </net>
 <net name="N$22" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="(PCINT7/ICP/OC0B/ADC7)_PA7"/>
 <pinref part="USER_INT" gate="G$1" pin="1"/>
-<wire x1="15.24" y1="45.72" x2="-10.16" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="-10.16" y1="45.72" x2="-20.32" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="45.72" x2="-20.32" y2="20.32" width="0.1524" layer="91"/>
 <pinref part="LED5" gate="G$1" pin="A"/>
 <wire x1="-10.16" y1="40.64" x2="-10.16" y2="45.72" width="0.1524" layer="91"/>
-<junction x="-10.16" y="45.72"/>
+<pinref part="IC1" gate="G$1" pin="(PCINT7/ICP/OC0B/ADC7)_PA7"/>
+<wire x1="15.24" y1="45.72" x2="-2.54" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="45.72" x2="-10.16" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="45.72" x2="-2.54" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="30.48" x2="114.3" y2="30.48" width="0.1524" layer="91"/>
+<junction x="-2.54" y="45.72"/>
+<wire x1="114.3" y1="30.48" x2="114.3" y2="17.78" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="3"/>
+<wire x1="114.3" y1="17.78" x2="132.08" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$23" class="0">
@@ -11839,23 +11963,24 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <segment>
 <pinref part="IC1" gate="G$1" pin="PA5_(ADC5/DO/MISO/OC1B/PCINT5)"/>
 <wire x1="114.3" y1="43.18" x2="116.84" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="43.18" x2="116.84" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="20.32" x2="30.48" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="20.32" x2="30.48" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="43.18" x2="116.84" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="22.86" x2="35.56" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="22.86" x2="35.56" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="ICSP1" gate="A" pin="1"/>
-<wire x1="30.48" y1="15.24" x2="43.18" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="116.84" y1="20.32" x2="127" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="127" y1="20.32" x2="127" y2="27.94" width="0.1524" layer="91"/>
-<junction x="116.84" y="20.32"/>
-<pinref part="USER_IN_2" gate="G$1" pin="2"/>
-<wire x1="127" y1="27.94" x2="134.62" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="15.24" x2="43.18" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="1"/>
+<wire x1="132.08" y1="20.32" x2="116.84" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="20.32" x2="116.84" y2="22.86" width="0.1524" layer="91"/>
+<junction x="116.84" y="22.86"/>
 </segment>
 </net>
 <net name="CUTDOWN" class="0">
 <segment>
-<pinref part="USER_IN_2" gate="G$1" pin="1"/>
-<wire x1="137.16" y1="27.94" x2="152.4" y2="27.94" width="0.1524" layer="91"/>
-<label x="152.4" y="27.94" size="1.27" layer="95" xref="yes"/>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="142.24" y1="27.94" x2="152.4" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="20.32" x2="142.24" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="142.24" y1="20.32" x2="142.24" y2="27.94" width="0.1524" layer="91"/>
+<label x="152.4" y="27.94" size="1.016" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$25" class="0">
@@ -11889,6 +12014,15 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <wire x1="119.38" y1="88.9" x2="45.72" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="76.2" x2="119.38" y2="76.2" width="0.1524" layer="91"/>
 <junction x="119.38" y="76.2"/>
+</segment>
+</net>
+<net name="DROGUE" class="0">
+<segment>
+<pinref part="JP2" gate="A" pin="4"/>
+<wire x1="139.7" y1="17.78" x2="144.78" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="17.78" x2="144.78" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="25.4" x2="152.4" y2="25.4" width="0.1524" layer="91"/>
+<label x="152.4" y="25.4" size="1.016" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>

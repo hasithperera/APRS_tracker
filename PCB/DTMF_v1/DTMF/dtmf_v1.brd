@@ -1527,6 +1527,34 @@ type 0207, grid 10 mm</description>
 <rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
 <rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
 </package>
+<package name="2X02" urn="urn:adsk.eagle:footprint:22337/1" library_version="4">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-2.54" y1="-1.905" x2="-1.905" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-2.54" x2="0" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="-1.905" x2="0.635" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-2.54" x2="2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-1.905" x2="-2.54" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="1.905" x2="-1.905" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="2.54" x2="-0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="2.54" x2="0" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="1.905" x2="0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="2.54" x2="1.905" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="2.54" x2="2.54" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="0" y1="1.905" x2="0" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="1.905" x2="2.54" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-2.54" x2="1.905" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-2.54" x2="-0.635" y2="-2.54" width="0.1524" layer="21"/>
+<pad name="1" x="-1.27" y="-1.27" drill="1.016" shape="octagon"/>
+<pad name="2" x="-1.27" y="1.27" drill="1.016" shape="octagon"/>
+<pad name="3" x="1.27" y="-1.27" drill="1.016" shape="octagon"/>
+<pad name="4" x="1.27" y="1.27" drill="1.016" shape="octagon"/>
+<text x="-2.54" y="3.175" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-4.445" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.524" y1="-1.524" x2="-1.016" y2="-1.016" layer="51"/>
+<rectangle x1="-1.524" y1="1.016" x2="-1.016" y2="1.524" layer="51"/>
+<rectangle x1="1.016" y1="1.016" x2="1.524" y2="1.524" layer="51"/>
+<rectangle x1="1.016" y1="-1.524" x2="1.524" y2="-1.016" layer="51"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="2X03" urn="urn:adsk.eagle:package:22462/2" type="model" library_version="4">
@@ -1545,6 +1573,12 @@ type 0207, grid 10 mm</description>
 <description>PIN HEADER</description>
 <packageinstances>
 <packageinstance name="1X02"/>
+</packageinstances>
+</package3d>
+<package3d name="2X02" urn="urn:adsk.eagle:package:22455/2" type="model" library_version="4">
+<description>PIN HEADER</description>
+<packageinstances>
+<packageinstance name="2X02"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -2048,11 +2082,6 @@ design rules under a new name.</description>
 <attribute name="NAME" x="15.24" y="22.452" size="1.27" layer="26" rot="MR270" align="center"/>
 <attribute name="VALUE" x="11.43" y="22.452" size="1.27" layer="28" rot="MR270" align="center"/>
 </element>
-<element name="USER_IN_2" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="58.166" y="10.16" smashed="yes">
-<attribute name="NAME" x="55.5498" y="11.9888" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="98" x="58.166" y="10.16" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="55.626" y="6.985" size="1.27" layer="27"/>
-</element>
 <element name="L5" library="adafruit" package="CHIP-LED0805" value="" x="25.908" y="8.636" smashed="yes" rot="R180">
 <attribute name="NAME" x="27.178" y="9.906" size="1.27" layer="25" rot="R270"/>
 <attribute name="VALUE" x="23.368" y="9.906" size="1.27" layer="27" rot="R270"/>
@@ -2092,6 +2121,11 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="2" x="23.622" y="6.604" size="1.778" layer="27" display="off"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="23.622" y="6.604" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="22.352" y="5.207" size="0.0254" layer="27"/>
+</element>
+<element name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="2X02" package3d_urn="urn:adsk.eagle:package:22455/2" value="" x="-13.208" y="-1.016" smashed="yes">
+<attribute name="NAME" x="-15.748" y="2.159" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="0" x="-13.208" y="-1.016" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-15.748" y="-5.461" size="1.27" layer="27"/>
 </element>
 </elements>
 <signals>
@@ -2271,11 +2305,13 @@ design rules under a new name.</description>
 <wire x1="42.418" y1="20.574" x2="42.418" y2="26.162" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$22">
-<contactref element="IC1" pad="6"/>
 <contactref element="USER_INT" pad="1"/>
 <contactref element="LED5" pad="A"/>
+<contactref element="IC1" pad="6"/>
+<contactref element="JP2" pad="3"/>
 <wire x1="47.13" y1="18.009" x2="47.532" y2="21.59" width="0" layer="19" extent="1-1"/>
 <wire x1="42.418" y1="23.622" x2="47.532" y2="21.59" width="0" layer="19" extent="1-1"/>
+<wire x1="-11.938" y1="-2.286" x2="42.418" y2="23.622" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$23">
 <contactref element="LED5" pad="C"/>
@@ -2285,12 +2321,9 @@ design rules under a new name.</description>
 <signal name="N$24">
 <contactref element="IC1" pad="8"/>
 <contactref element="ICSP1" pad="1"/>
-<contactref element="USER_IN_2" pad="2"/>
-<wire x1="59.436" y1="10.16" x2="55.45" y2="26.818" width="0" layer="19" extent="1-1"/>
-<wire x1="45.86" y1="12.587" x2="59.436" y2="10.16" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="CUTDOWN">
-<contactref element="USER_IN_2" pad="1"/>
+<contactref element="JP2" pad="1"/>
+<wire x1="45.86" y1="12.587" x2="55.45" y2="26.818" width="0" layer="19" extent="1-1"/>
+<wire x1="-14.478" y1="-2.286" x2="45.86" y2="12.587" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$25">
 <contactref element="L5" pad="C"/>
@@ -2310,6 +2343,12 @@ design rules under a new name.</description>
 <contactref element="IC2" pad="13"/>
 <wire x1="22.818" y1="14.28" x2="50.94" y2="12.587" width="0" layer="19" extent="1-1"/>
 <wire x1="21.844" y1="8.382" x2="22.818" y2="14.28" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="CUTDOWN">
+<contactref element="JP2" pad="2"/>
+</signal>
+<signal name="DROGUE">
+<contactref element="JP2" pad="4"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
