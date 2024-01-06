@@ -33,11 +33,14 @@ Interface pin list between APRS and DTMF boards
  - optional x 2 for future use - Potentially to kill the PhaT module after landing
 	Total of 10 pins. 5x2 connector specification as shown below
 	
-	![|200](../../Pasted%20image%2020231225124723.png)
+	
+### 05/01/2024
 
+- Finalized the PCB design and generated outputs compatible with JLC
+![](../res/Pasted%20image%2020240105212120.png)
 
 ### Todo
 
 - [x] Test a schematic for MT8870
-- [ ] PCB design
+- [x] PCB design ✅ 2024-01-05
 
