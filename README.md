@@ -70,3 +70,4 @@ APRS ground testing.
 - [x] field testing 
 - [x] finalized PCB design 
 - [x] long range testing at altitude
+- [ ] Adopt a built in MCU
