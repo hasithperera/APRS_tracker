@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -11562,13 +11562,13 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <part name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2"/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
-<part name="L1" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
+<part name="D1" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="330"/>
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="ICSP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X3" device="" package3d_urn="urn:adsk.eagle:package:22462/2"/>
-<part name="L2" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
+<part name="D2" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
 <part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="330"/>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="TP4" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2" value="PTR1B1,27"/>
@@ -11688,7 +11688,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <instance part="P+4" gate="VCC" x="10.16" y="53.34" smashed="yes">
 <attribute name="VALUE" x="7.62" y="50.8" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="L1" gate="G$1" x="22.86" y="50.8" smashed="yes">
+<instance part="D1" gate="G$1" x="22.86" y="50.8" smashed="yes">
 <attribute name="NAME" x="26.416" y="46.228" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="28.575" y="46.228" size="1.778" layer="96" rot="R90"/>
 </instance>
@@ -11709,7 +11709,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <attribute name="NAME" x="72.39" y="31.115" size="1.778" layer="95"/>
 <attribute name="VALUE" x="72.39" y="17.78" size="1.778" layer="96"/>
 </instance>
-<instance part="L2" gate="G$1" x="93.98" y="83.82" smashed="yes" rot="R90">
+<instance part="D2" gate="G$1" x="93.98" y="83.82" smashed="yes" rot="R90">
 <attribute name="NAME" x="96.012" y="87.376" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="98.552" y="89.535" size="1.778" layer="96" rot="R180"/>
 </instance>
@@ -12058,7 +12058,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="48.26" y1="60.96" x2="38.1" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="60.96" x2="38.1" y2="83.82" width="0.1524" layer="91"/>
 <wire x1="38.1" y1="83.82" x2="86.36" y2="83.82" width="0.1524" layer="91"/>
-<pinref part="L2" gate="G$1" pin="A"/>
+<pinref part="D2" gate="G$1" pin="A"/>
 <wire x1="86.36" y1="83.82" x2="91.44" y2="83.82" width="0.1524" layer="91"/>
 <junction x="86.36" y="83.82"/>
 <pinref part="TP5" gate="G$1" pin="TP"/>
@@ -12081,9 +12081,9 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <label x="149.86" y="68.58" size="1.016" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="Q4"/>
-<wire x1="76.2" y1="116.84" x2="63.5" y2="116.84" width="0.1524" layer="91"/>
-<label x="76.2" y="116.84" size="1.016" layer="95" xref="yes"/>
+<pinref part="IC2" gate="G$1" pin="Q1"/>
+<wire x1="63.5" y1="109.22" x2="71.12" y2="109.22" width="0.1524" layer="91"/>
+<label x="71.12" y="109.22" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="Q2" class="0">
@@ -12096,9 +12096,9 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <label x="149.86" y="63.5" size="1.016" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="Q2"/>
-<wire x1="63.5" y1="111.76" x2="76.2" y2="111.76" width="0.1524" layer="91"/>
-<label x="76.2" y="111.76" size="1.016" layer="95" xref="yes"/>
+<pinref part="IC2" gate="G$1" pin="Q3"/>
+<wire x1="63.5" y1="114.3" x2="71.12" y2="114.3" width="0.1524" layer="91"/>
+<label x="71.12" y="114.3" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -12224,14 +12224,14 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="147.32" y1="43.18" x2="147.32" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="3"/>
 <wire x1="147.32" y1="30.48" x2="165.1" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="L1" gate="G$1" pin="A"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 <wire x1="22.86" y1="53.34" x2="22.86" y2="58.42" width="0.1524" layer="91"/>
 <junction x="22.86" y="58.42"/>
 </segment>
 </net>
 <net name="N$23" class="0">
 <segment>
-<pinref part="L1" gate="G$1" pin="C"/>
+<pinref part="D1" gate="G$1" pin="C"/>
 <pinref part="R10" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -12266,7 +12266,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 </net>
 <net name="N$25" class="0">
 <segment>
-<pinref part="L2" gate="G$1" pin="C"/>
+<pinref part="D2" gate="G$1" pin="C"/>
 <pinref part="R11" gate="G$1" pin="1"/>
 <wire x1="99.06" y1="83.82" x2="101.6" y2="83.82" width="0.1524" layer="91"/>
 </segment>
@@ -12281,9 +12281,9 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <label x="149.86" y="60.96" size="1.016" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="Q1"/>
-<wire x1="63.5" y1="109.22" x2="76.2" y2="109.22" width="0.1524" layer="91"/>
-<label x="76.2" y="109.22" size="1.016" layer="95" xref="yes"/>
+<pinref part="IC2" gate="G$1" pin="Q4"/>
+<wire x1="63.5" y1="116.84" x2="71.12" y2="116.84" width="0.1524" layer="91"/>
+<label x="71.12" y="116.84" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="Q3" class="0">
@@ -12296,9 +12296,9 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <label x="149.86" y="66.04" size="1.016" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="Q3"/>
-<wire x1="63.5" y1="114.3" x2="76.2" y2="114.3" width="0.1524" layer="91"/>
-<label x="76.2" y="114.3" size="1.016" layer="95" xref="yes"/>
+<pinref part="IC2" gate="G$1" pin="Q2"/>
+<wire x1="63.5" y1="111.76" x2="71.12" y2="111.76" width="0.1524" layer="91"/>
+<label x="71.12" y="111.76" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="DROGUE" class="0">

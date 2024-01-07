@@ -51,8 +51,15 @@ APRS ground testing.
 ### update: October 2023
 
 - updated the GPS module
+	- logic levels were found to be incompatible with the arduino nano
+	- Used a 74XX IC to invert the signal two times. Firmware was updated to use GLONASS packets 
 
 ![aprs_v3](doc/aprs_v3.png)
+
+### DTMF daughter board
+
+![Pasted image 20240105212120](data/res/Pasted%20image%2020240105212120.png)
+
 ## Todo list 
 
 - [x] interface GPS sensor
