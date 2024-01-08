@@ -11567,7 +11567,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="330"/>
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="ICSP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X3" device="" package3d_urn="urn:adsk.eagle:package:22462/2"/>
+<part name="ICSP" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-2X3" device="" package3d_urn="urn:adsk.eagle:package:22462/2"/>
 <part name="D2" library="adafruit" deviceset="LED" device="CHIP-LED0805"/>
 <part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="330"/>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -11705,7 +11705,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <instance part="GND7" gate="1" x="88.9" y="17.78" smashed="yes">
 <attribute name="VALUE" x="86.36" y="15.24" size="1.778" layer="96"/>
 </instance>
-<instance part="ICSP1" gate="A" x="78.74" y="25.4" smashed="yes">
+<instance part="ICSP" gate="A" x="78.74" y="25.4" smashed="yes">
 <attribute name="NAME" x="72.39" y="31.115" size="1.778" layer="95"/>
 <attribute name="VALUE" x="72.39" y="17.78" size="1.778" layer="96"/>
 </instance>
@@ -11829,7 +11829,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="152.4" y1="58.42" x2="152.4" y2="38.1" width="0.1524" layer="91"/>
 <junction x="152.4" y="58.42"/>
 <wire x1="152.4" y1="38.1" x2="66.04" y2="38.1" width="0.1524" layer="91"/>
-<pinref part="ICSP1" gate="A" pin="3"/>
+<pinref part="ICSP" gate="A" pin="3"/>
 <wire x1="66.04" y1="38.1" x2="66.04" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="66.04" y1="25.4" x2="76.2" y2="25.4" width="0.1524" layer="91"/>
 </segment>
@@ -11842,7 +11842,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 </segment>
 <segment>
 <wire x1="46.99" y1="40.64" x2="96.52" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="ICSP1" gate="A" pin="4"/>
+<pinref part="ICSP" gate="A" pin="4"/>
 <wire x1="83.82" y1="25.4" x2="96.52" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="25.4" x2="96.52" y2="40.64" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="(PCINT6/OC1A/SDA/MOSI/DI/ADC6)_PA6"/>
@@ -11917,7 +11917,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="22.86" y1="33.02" x2="22.86" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="ICSP1" gate="A" pin="6"/>
+<pinref part="ICSP" gate="A" pin="6"/>
 <wire x1="83.82" y1="22.86" x2="88.9" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="GND7" gate="1" pin="GND"/>
 <wire x1="88.9" y1="22.86" x2="88.9" y2="20.32" width="0.1524" layer="91"/>
@@ -11999,7 +11999,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="10.16" y1="33.02" x2="10.16" y2="50.8" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="ICSP1" gate="A" pin="2"/>
+<pinref part="ICSP" gate="A" pin="2"/>
 <wire x1="83.82" y1="27.94" x2="91.44" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="P+5" gate="VCC" pin="VCC"/>
 <wire x1="91.44" y1="27.94" x2="91.44" y2="45.72" width="0.1524" layer="91"/>
@@ -12205,7 +12205,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="22.86" y1="-5.08" x2="25.4" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="ICSP1" gate="A" pin="5"/>
+<pinref part="ICSP" gate="A" pin="5"/>
 <wire x1="76.2" y1="22.86" x2="68.58" y2="22.86" width="0.1524" layer="91"/>
 <label x="68.58" y="22.86" size="0.8128" layer="95" rot="R180" xref="yes"/>
 </segment>
@@ -12242,7 +12242,7 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <wire x1="149.86" y1="55.88" x2="149.86" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="149.86" y1="35.56" x2="68.58" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="35.56" x2="68.58" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="ICSP1" gate="A" pin="1"/>
+<pinref part="ICSP" gate="A" pin="1"/>
 <wire x1="68.58" y1="27.94" x2="76.2" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="JP2" gate="A" pin="1"/>
 <wire x1="165.1" y1="33.02" x2="149.86" y2="33.02" width="0.1524" layer="91"/>
@@ -12391,9 +12391,9 @@ Source: &lt;a href="https://www.mccsemi.com/pdf/Products/MCQ4406A(SOP-8).pdf"&gt
 <approved hash="113,1,12.9261,32.7829,JP3,,,,,"/>
 <approved hash="113,1,16.51,64.5953,C3,,,,,"/>
 <approved hash="113,1,16.51,82.3753,C4,,,,,"/>
-<approved hash="113,1,23.1817,49.53,L1,,,,,"/>
-<approved hash="113,1,79.9677,26.8961,ICSP1,,,,,"/>
-<approved hash="113,1,95.25,84.1417,L2,,,,,"/>
+<approved hash="113,1,23.1817,49.53,D1,,,,,"/>
+<approved hash="113,1,79.9677,26.8961,ICSP,,,,,"/>
+<approved hash="113,1,95.25,84.1417,D2,,,,,"/>
 <approved hash="113,1,168.868,33.2461,JP2,,,,,"/>
 <approved hash="113,1,114.196,67.206,FRAME1,,,,,"/>
 </errors>
