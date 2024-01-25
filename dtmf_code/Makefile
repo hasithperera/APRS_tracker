@@ -36,7 +36,7 @@ MCU = attiny84
 
 
 # Processor frequency
-F_CPU = 8000000
+F_CPU = 1000000
 
 
 # Output format 

@@ -1,5 +1,4 @@
-#define F_CPU 800000UL
-
+#define F_CPU 1000000
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -21,11 +20,11 @@ if(PINA & _BV(PA7)){
  
 while(1){
  
-	PORTA |= _BV(PA7);
-	_delay_ms(100);
+	PORTA |= _BV(PA7) | _BV(PA6);
+	_delay_ms(50);
  
-	PORTA &= ~_BV(PA7) ;
-	 _delay_ms(100);
+	PORTA &= ~_BV(PA7) & ~_BV(PA6) ;
+	 _delay_ms(50);
 }
  
  return 0;
@@ -37,7 +36,7 @@ while(1){
 void init_io(){
 
 //LED indicator
-DDRA = DDRA | _BV(PA7);
+DDRA |= _BV(PA7) | _BV(PA6);
 
 
 }
