@@ -1,6 +1,6 @@
 #include<avr/io.h>
 
-char tosend[5]="test";
+char tosend[10]="012443";
 
 //Attiny-84 pinout
 //PA4 -SCL
@@ -11,10 +11,12 @@ void i2c_ack()
   DDRA&=~(1<<PA6);  //Change direction of SDA to receive acknowledge bit
   USISR|=(1<<USICNT3)|(1<<USICNT2)|(1<<USICNT1); //Set counter to 1110 to force it to overflow when ACK bit is received
   i2c_transfer();   //Byte transmission
+	DDRA |=_BV(PA6); //ahe
 }
 
 void i2c_transfer()
 {
+	PORTA &= ~ _BV(PA4);
   do
   {
   USICR|=(1<<USITC);   //Clock signal from SCL
@@ -24,7 +26,12 @@ void i2c_transfer()
   _delay_us(5);
   }while(!(USISR&(1<<USIOIF)));  //Repeat clock generation at SCL until the counter overflows and a byte is transferred
   _delay_us(5);
+	
+	USIDR=0x80;
+
   USISR|=(1<<USIOIF);      //Clear overflow flag
+	//PORTA&= ~_BV(PA5);
+
 }
 void i2c_actual_data()
 {
@@ -50,16 +57,18 @@ void i2c_start()
   PORTA&=~(1<<PA4);  //Pulling SLC line low
   _delay_us(5);
   while(USISIF==1); //detection of start condition
+	PORTA|= _BV(PA5);
 }
 
 void initialize()
 {
   USICR=(1<<USIWM1)|(1<<USICS1)|(1<<USICLK);  //TWI mode
-  DDRA=(1<<PA4)|(1<<PA6); //SDA & SCL direction as output
-  PORTA=(1<<PA4)|(1<<PA6); //SDA & SCL default state
-  i2c_start();
-  USIDR=0; //address of slave and select write operation
-  i2c_transfer();
+  DDRA|=(1<<PA4)|(1<<PA6); //SDA & SCL direction as output
+  PORTA|=(1<<PA4)|(1<<PA6); //SDA & SCL default state
+  
+	i2c_start();
+  USIDR=0xff; //address of slave and select write operation
+ 	i2c_transfer();
   i2c_ack();
 }
 
