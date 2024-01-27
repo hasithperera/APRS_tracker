@@ -39,6 +39,10 @@ Interface pin list between APRS and DTMF boards
 - Finalized the PCB design and generated outputs compatible with JLC
 ![](../res/Pasted%20image%2020240105212120.png)
 
+# 27/01/2024
+
+- Tested tone detection with the attiny 84. 4.7 M resister was replaced on R3 for amplification.
+- Indoor testing showed working DTMF decording working on the 1st floor of the building 
 ### Todo
 
 - [x] Test a schematic for MT8870
