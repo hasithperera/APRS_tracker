@@ -5,6 +5,8 @@
 #include <HardwareSerial.h>
 #include "DRA818.h"  // uncomment the following line in DRA818.h (#define DRA818_DEBUG)
 #include <LibAPRS_Tracker.h>
+#include <Wire.h>
+
 
 #define ADC_REFERENCE REF_5V
 #define OPEN_SQUELCH false
@@ -25,8 +27,8 @@
 // old 300
 #define timeout 150
 
-#define freq_rx 144.978
-#define freq_main 144.390  //145.390
+#define freq_rx 146.530
+#define freq_main 146.530  //145.390
 
 #define ctcss 146.2
 
@@ -44,6 +46,8 @@ SoftwareSerial gps(8, 10);  // RX, TX
 char Lat[] = "xxxx.xxxxxx";
 char Lon[] = "xxxxx.xxxxxxxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+char cmd[20];
+int cmd_cnt = 0;
 
 int time_share = 0;
 int msg_id = 0;
@@ -56,7 +60,9 @@ int packet_id = 0;
 void setup() {
 
   Serial.begin(9600);  // for logging
+  //Wire.begin(0x08);     //added for i2c`:w
 
+   
   Serial.println("[info] KE8TJE - APRS tracker v3 - Beta");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
@@ -91,7 +97,8 @@ void loop() {
 
 
   gps.stopListening();
-
+  Wire.end(); //ahe-1
+  
   if (msg_id > 0 & msg_valid == 1) {
     location_update();
     Serial.println("SEND APRS");
@@ -99,7 +106,9 @@ void loop() {
     Serial.println("[info] ------------------------ No location data");
   }
   gps.listen();
-
+  Wire.begin(0x08); //ahe-1
+  Wire.onReceive(receiveEvent); // ahe-1
+  
 
   while (time_share < timeout) {
     while (gps.available() > 0) {
@@ -322,7 +331,7 @@ int location_update() {
   APRS_setLat(Lat);
   APRS_setLon(Lon);
 
-  // Icon - setting
+  // Icon - setting:
   //APRS_setSymbol('S');
   // S - shuttle
   // < - Bike
@@ -346,4 +355,14 @@ int location_update() {
   Serial.println(alt);
   msg_valid = 0;
   //gps.flush();
+}
+
+
+void receiveEvent(int howMany) {
+  /*while (1 < Wire.available()) { // loop through all but the last
+    char c = Wire.read(); // receive byte as a character
+    Serial.print(c);         // print the character
+  }*/
+  cmd[cmd_cnt++] Wire.read();    // receive byte as an integer
+  Serial.println(x);         // print the integer
 }

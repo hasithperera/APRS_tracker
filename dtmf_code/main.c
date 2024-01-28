@@ -23,7 +23,7 @@ int main(void) {
 //initialization to check if program mode is on
 
 #define SLAVE_APRS 0x08
-#define debug 1
+//#define debug 1
 
 
 if(PINA & _BV(PA7)){
