@@ -3,14 +3,16 @@
 #include <avr/io.h>
 #include <util/delay.h>
 //#include "i2c_primary.c"
-//#include "i2c.c"
 
 #include <stdint.h>            // has to be added to use uint8_t
 #include <avr/interrupt.h>    // Needed to use interrupts
 
+#include "USI_TWI_Master.c" 
+
 
 char cmd=0;
-
+unsigned char msg_buff[4];
+unsigned char slave_add,temp,myData=0;
 int main(void) {
 
 
@@ -35,8 +37,19 @@ if(PINA & _BV(PA7)){
 	init_io(); 
 	sei();
 
-	while(1){
+	//i2c test
+	slave_add = 0x10;
+	msg_buff[0] = (slave_add<<TWI_ADR_BITS) | (TRUE<<TWI_READ_BIT);
+	msg_buff[1] = 1;
+	msg_buff[2] = 2;
 
+	
+	while(1){
+	
+	//I2C tests
+	USI_TWI_Start_Transceiver_With_Data(msg_buff,4);
+// Tested code for DTMF
+/*
 	if(cmd){
 		for(cmd;cmd>0;cmd--){
 			PORTA |= _BV(PA7);
@@ -46,10 +59,11 @@ if(PINA & _BV(PA7)){
 		}
 		PORTA &= ~(_BV(PA5));
 	}
+*/
 
-	_delay_ms(100);
-//	if(cmd)
-//	}
+	_delay_ms(10);
+
+
 	} 
  return 0;
 }
@@ -79,6 +93,7 @@ MCUCR |= (1<< ISC01); // falling edge
 GIMSK |= (1<<INT0);
 SREG |= (1<<7);
 
+USI_TWI_Master_Initialise();
 
 }
 
