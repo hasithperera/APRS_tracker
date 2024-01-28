@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ATTINY84A-SSF
+D Atmel ATTINY84A-SSF, 8bit AVR Microcontroller, 20MHz, 8 kB Flash, 14-Pin SOIC
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/8183S.pdf
+$ENDCMP
+#
+#End Doc Library
