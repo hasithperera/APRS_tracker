@@ -25,12 +25,10 @@
 // old 300
 #define timeout 150
 
-#define freq_rx 146.5300   // DTMF testinf frequency 
+#define freq_rx 144.978
 #define freq_main 144.390  //145.390
 
 #define ctcss 146.2
-
-// un comment to generate APRS
 
 //#define simulate 1
 
@@ -64,15 +62,8 @@ void setup() {
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
   init_radio();
-
-  //use the sql pin - as an interupt
-
-  pinMode(radio_sql, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(radio_sql), sql, FALLING);
-
   radio_on();
   set_radio_pwr(0);
-
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
@@ -86,27 +77,14 @@ void setup() {
   gps.begin(9600);
 
   //init radio module and change frequency
-  //syntax
-  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_rx, -, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
-  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_rx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
 
+  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   if (!dra) {
     Serial.println("[err ] RF init failed");
   } else {
     Serial.println("[info] RF OK");
-    Serial.print("[inf0] Rx on ");
-    Serial.println(freq_rx);
-
-    radio_TX();
-    delay(1000);
-    radio_RX();
   }
-}
-
-void sql(){
-
-  Serial.println('>');
-
 }
 
 void loop() {
