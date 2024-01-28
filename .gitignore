@@ -1,7 +1,0 @@
-*.pdf
-
-#eagle files
-*.b#*
-*.s#*
-*.pro
-*.job
