@@ -11,12 +11,20 @@
 //#include "old/i2c.c"
 
 char cmd=0;
-unsigned char msg_buff[10];
-unsigned char slave_add,temp,myData=0;
+
+char cmds[20];
+char cmd_no=0;
+
+char cmd_str[4] ={7,8,9,12};
+int cmd_match=1;
+
 int main(void) {
 
-
 //initialization to check if program mode is on
+
+#define SLAVE_APRS 0x08
+#define debug 1
+
 
 if(PINA & _BV(PA7)){
 	while(1){
@@ -39,43 +47,45 @@ if(PINA & _BV(PA7)){
 
 	//i2c test
 	
-	msg_buff[0] = (0x08 << 1) | 0x01;
-	msg_buff[1] = 0x88;
-
 	while(1){	
-	//I2C tests
-	USI_TWI_Master_Start();
-	 unsigned char const tempUSISR_8bit = (1<<USISIF)|(1<<USIOIF)|(1<<USIPF)|(1<<USIDC)|      // Prepare register value to: Clear flags, and
-                                 (0x0<<USICNT0);                                     // set USI to shift 8 bits i.e. count 16 clock edges.
-  unsigned char const tempUSISR_1bit = (1<<USISIF)|(1<<USIOIF)|(1<<USIPF)|(1<<USIDC)|      // Prepare register value to: Clear flags, and
-                                 (0xE<<USICNT0); 									// set USI to shift 1 bit i.e. count 2 clock edges.
-	
 
-	USIDR = 0x08<<1|0;
-	USI_TWI_Master_Transfer(tempUSISR_8bit);
-	USI_TWI_Master_Transfer(tempUSISR_1bit);
-	USIDR = 65;
-	USI_TWI_Master_Transfer(tempUSISR_8bit);
-	USI_TWI_Master_Transfer(tempUSISR_1bit);
-	USI_TWI_Master_Stop();
-	
+//	send_i2c_data(65,SLAVE_APRS);
 
 
-/*
 	if(cmd){
-		for(cmd;cmd>0;cmd--){
-			PORTA |= _BV(PA7);
-			_delay_ms(1);
-			PORTA &= ~(_BV(PA7));
-			_delay_ms(1);
-		}
-		PORTA &= ~(_BV(PA5));
+			cmds[cmd_no++] = cmd; //store cmds
+			#ifdef debug
+				send_i2c_data(cmd+100,SLAVE_APRS); //debug
+			#endif
+			if(cmd==12 | cmd_no>19){
+				
+				cmd_match = 1;
+				int i;
+				for(i=0;i<cmd_no;i++){
+					send_i2c_data(cmds[i],SLAVE_APRS); //debug
+					
+					if(!(cmds[i]==cmd_str[i]))
+						cmd_match = 0;
+				}
+				if(cmd_match){
+					cutdown();
+				}
+				cmd_no = 0;
+			}
+			cmd = 0;
 	}
-*/
 	
+#ifdef debug
+		PORTA |= _BV(PA7);
+		_delay_ms(50);
+ 
+		PORTA &= ~_BV(PA7);
+	 	_delay_ms(50);
+#endif
 
-	_delay_ms(1000);
-
+#ifndef debug
+	_delay_ms(100);
+#endif
 
 	} 
  return 0;
@@ -111,9 +121,47 @@ USI_TWI_Master_Initialise();
 }
 
 
+
 ISR(INT0_vect){
 
-	PORTA |= _BV(PA5);
 	cmd = PINA & 0x0f;	
+}
+
+//i2c function
+
+void send_i2c_data(char data,char address){
+
+	unsigned char const tempUSISR_8bit = (1<<USISIF)|(1<<USIOIF)|(1<<USIPF)|(1<<USIDC)|      // Prepare register value to: Clear flags, and
+                                 (0x0<<USICNT0);                                     // set USI to shift 8 bits i.e. count 16 clock edges.
+  unsigned char const tempUSISR_1bit = (1<<USISIF)|(1<<USIOIF)|(1<<USIPF)|(1<<USIDC)|      // Prepare register value to: Clear flags, and
+                                 (0xE<<USICNT0); 									// set USI to shift 1 bit i.e. count 2 clock edges.
+	
+	USI_TWI_Master_Start();
+	USIDR = address<<1|0;
+	USI_TWI_Master_Transfer(tempUSISR_8bit);
+	USI_TWI_Master_Transfer(tempUSISR_1bit);
+	USIDR = data;
+	USI_TWI_Master_Transfer(tempUSISR_8bit);
+	USI_TWI_Master_Transfer(tempUSISR_1bit);
+	USI_TWI_Master_Stop();
+
+}
+
+
+void cutdown(){
+	// cutdown sequence
+	for(int i=0;i<20;i++){
+
+		PORTA |= _BV(PA5);
+		_delay_ms(100);
+#ifndef debug
+		PORTA &= ~_BV(PA5);
+	 	_delay_ms(100);
+#endif
+	}
+
+	//turn off mosfet
+	PORTA &= ~_BV(PA5);
+	_delay_ms(100);
 
 }
