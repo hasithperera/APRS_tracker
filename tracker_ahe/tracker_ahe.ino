@@ -27,8 +27,8 @@
 // old 300
 #define timeout 150
 
-#define freq_rx 146.530
-#define freq_main 146.530  //145.390
+#define freq_rx 145.390
+#define freq_main 145.390  //145.390
 
 #define ctcss 146.2
 
@@ -73,7 +73,7 @@ void setup() {
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
-    freq_tx = 144.590;
+    freq_tx = freq_main;
     Serial.println("[info] Alternate freq set");
   } else {
     freq_tx = freq_main;
@@ -84,8 +84,9 @@ void setup() {
 
   //init radio module and change frequency
 
-  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, sql=4, vol=8, 0, 0, DRA818_12K5, true, true, true, &Serial);
   dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+
   if (!dra) {
     Serial.println("[err ] RF init failed");
   } else {
@@ -363,6 +364,11 @@ void receiveEvent(int howMany) {
     char c = Wire.read(); // receive byte as a character
     Serial.print(c);         // print the character
   }*/
-  cmd[cmd_cnt++] Wire.read();    // receive byte as an integer
-  Serial.println(x);         // print the integer
+  //cmd[cmd_cnt++];
+  int x = Wire.read();    // receive byte as an integer
+  Serial.print(x);         // print the integer
+  Serial.print(',');
+  if(cmd==12)
+    Serial.println();
+
 }
