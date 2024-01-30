@@ -1,0 +1,13 @@
+Dire Wolf DEVELOPMENT version 1.7 F (Apr  9 2023)
+ERROR - Could not open config file sdr.conf
+Try using -c command line option for alternate location.
+Audio input device for receive: stdin  (channel 0)
+Audio out device for transmit: default  (channel 0)
+Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, A+, 24000 sample rate.
+Note: PTT not configured for channel 0. (Ignore this if using VOX.)
+Ready to accept AGW client application 0 on port 8000 ...
+Ready to accept KISS TCP client application 0 on port 8001 ...
+
+QRT
+
+End of file on stdin.  Exiting.
