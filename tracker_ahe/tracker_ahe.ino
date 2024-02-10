@@ -59,7 +59,7 @@ int packet_id = 0;
 
 void setup() {
 
-  Serial.begin(9600);  // for logging
+  Serial.begin(57600);  // for logging
   //Wire.begin(0x08);     //added for i2c`:w
 
    
@@ -85,7 +85,7 @@ void setup() {
   //init radio module and change frequency
 
   //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, sql=4, vol=8, 0, 0, DRA818_12K5, true, true, true, &Serial);
-  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 4, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 7, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
 
   if (!dra) {
     Serial.println("[err ] RF init failed");
@@ -288,7 +288,7 @@ void update_GPS_alt(String gps_data) {
   sprintf(Lon, "%s%s\0", Lon, p);
 
   p = strtok(NULL, ",");  //state
-  sprintf(alt,"ARC Roadtripping,");
+  sprintf(alt,"WV-BEAR,");
   
   p = strtok(NULL, ",");    //sta-no
   strcat(alt,p);
@@ -309,6 +309,8 @@ int location_update() {
   int wait = 400;
 
   // stop transmitting on a busy channel
+
+  /*
   while (digitalRead(radio_sql) == 0) {
     wait--;
     Serial.print(".");
@@ -317,6 +319,8 @@ int location_update() {
       return 0;
     }
   }
+  */
+  
   //radio_TX();
   Serial.println("[info] APRS:start");
   time_share = 0;
