@@ -1,5 +1,14 @@
-**/*.pdf
-
 **/*.eep
 **/*.o
 
+# mac files
+.DS_Store
+
+# documentation
+*.pdf
+
+
+#binary files coming from PCB design
+*.*#*
+*.pro
+*.zip
