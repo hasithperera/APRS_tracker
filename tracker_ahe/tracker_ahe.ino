@@ -27,8 +27,9 @@
 // old 300
 #define timeout 150
 
-#define freq_rx 145.390
-#define freq_main 145.390  //145.390
+#define freq_rx 146.800
+#define freq_main 144.390
+#define freq_alt 145.390
 
 #define ctcss 146.2
 
@@ -74,18 +75,19 @@ void setup() {
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
     freq_tx = freq_main;
-    Serial.println("[info] Alternate freq set");
+
   } else {
-    freq_tx = freq_main;
-    Serial.println("[info] APRS freq set");
+    freq_tx = freq_alt;
   }
+  Serial.print("[info] ");
+  Serial.println(freq_tx);
   //start GPS
   gps.begin(9600);
 
   //init radio module and change frequency
 
-  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_rx, freq_tx, sql=4, vol=8, 0, 0, DRA818_12K5, true, true, true, &Serial);
-  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_tx, 7, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  //dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_rx, sql=4, vol=8, 0, 0, DRA818_12K5, true, true, true, &Serial);
+  dra = DRA818::configure(dra_serial, DRA818_VHF, freq_tx, freq_rx, 5, 8, 0, 0, DRA818_12K5, true, true, true, &Serial);
 
   if (!dra) {
     Serial.println("[err ] RF init failed");
@@ -102,7 +104,8 @@ void loop() {
   
   if (msg_id > 0 & msg_valid == 1) {
     location_update();
-    Serial.println("SEND APRS");
+    Serial.print("APRS:");
+    Serial.println(freq_tx);
   } else {
     Serial.println("[info] ------------------------ No location data");
   }
@@ -293,7 +296,7 @@ void update_GPS_alt(String gps_data) {
     return;
   }
 
-  sprintf(alt,"WV-BEAR,");
+  sprintf(alt,"APRS-v4.0,");
   
   p = strtok(NULL, ",");    //sta-no - <7>
   strcat(alt,p);
@@ -345,8 +348,10 @@ int location_update() {
   //APRS_setSymbol('S');
   // S - shuttle
   // < - Bike
-  //O - Balloon
-  //> - car
+  // O - Balloon
+  // > - car
+  // $ - phone
+  // [ - walker
 
   APRS_setSymbol('>');  
 
