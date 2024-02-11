@@ -63,7 +63,7 @@ void setup() {
   //Wire.begin(0x08);     //added for i2c`:w
 
    
-  Serial.println("[info] KE8TJE - APRS tracker v3 - Beta");
+  Serial.println("[info] KE8TJE - APRS tracker v4 - Beta");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -120,15 +120,13 @@ void loop() {
       if (gps_raw.substring(0, 6) == "$GNRMC") {
         //simulate locked data
         if (digitalRead(sim_packet) == 0) {
-          gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+          //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
 
           // V2 - Packet
           // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
 
           // V3 - Packet
           // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-
-          //
           Serial.println("[info] Sim Packet");
         }
 
@@ -144,36 +142,27 @@ void loop() {
         }
       }
 
-      //long packet - code
+      //long altitude packet - code
       // v2 - "$GPGGA"
       // v3 - "$GNGGA"
-      //Serial.println(gps_raw);
+      //Serial.println(gps_raw); 
+
+      // debug packet
+      //gps_raw = "$GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42";
+
+      //$GNGGA,033145.000,3938.0803,N,07957.1891,W,1,09,1.05,293.2,M,-33.0,M,,*4D
+
       if (gps_raw.substring(0, 6) == "$GNGGA"){
         
-        // debug packet
-        //gps_raw = "$GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42";
-        
-        Serial.println(gps_raw);
-        update_GPS_alt(gps_raw);
-      }
-/*
-      if (gps_raw.substring(0, 6) == "$GNGGA") {
-        //simulate locked data
-        Serial.println("Altitude packet");
-        if (digitalRead(sim_packet) == 0) {
-          gps_raw = "$GPGGA,191757.00,3938.28486,N,07957.13511,W,1,03,2.71,274.5,M,-33.9,M,,*6F";
-          Serial.println("[info] Sim Packet 2");
-        }
-        Serial.println(gps_raw);
-
-        if (gps_raw.length() > 40) {
-          msg_id++;
+        if (gps_raw.length() > 50) {
           // GPS locked
+          //update_GPS(gps_raw);
+          Serial.println(gps_raw);
           update_GPS_alt(gps_raw);
-        }
+          //i2c functions needed
+        }     
       }
-      */
-      
+
     }
   }
   time_share = 0;
@@ -202,6 +191,7 @@ void update_GPS(String gps_data) {
     Serial.println("[i] GPS valid");
   } else {
     Serial.println("[!] Invalid data");
+    msg_valid = 0;
     return;
   }
   //Process longitude
@@ -251,14 +241,17 @@ void update_GPS_alt(String gps_data) {
   // v3
   // $GNGGA,165006.000,2241.9107,N,12017.2383,E,1,14,0.79,22.6,M,18.5,M,,*42
 
+  // Documentation: https://openrtk.readthedocs.io/en/latest/communication_port/nmea.html
+  //$GNGGA<0>,000520.095<1>,<2>,<3>,<4>,<5>,0<6>,0<7>,<8>,<9>,M<10>,<11>,M<12>,<13>,*5D<14>
+
   char test_data[100];
   gps_data.toCharArray(test_data, 100);
 
-  char *p = strtok(test_data, ",");  //code
-  p = strtok(NULL, ",");             //time
+  char *p = strtok(test_data, ",");  //code - <0>
+  p = strtok(NULL, ",");             //time - <1>
 
 
-  p = strtok(NULL, ",");             //lat
+  p = strtok(NULL, ",");             //lat - <2>
   sprintf(Lat, "%s", p);
 
   // bug fix in v2
@@ -269,13 +262,13 @@ void update_GPS_alt(String gps_data) {
   }
 
   
-  p = strtok(NULL, ",");  // lat_char
+  p = strtok(NULL, ",");  // lat_char - <3>
   sprintf(Lat, "%s%s\0", Lat, p);
 
   //p = strtok(NULL, ",");             //lng
   //p = strtok(NULL, ",");             //dir
 
-  p = strtok(NULL, ",");  //lng
+  p = strtok(NULL, ",");  //lng - <4>
   sprintf(Lon, "%s", p);
 
   if (Lon[4] == '.') {
@@ -284,16 +277,28 @@ void update_GPS_alt(String gps_data) {
     Lon[8] = '\0';
   }
 
-  p = strtok(NULL, ",");  //dir
+  p = strtok(NULL, ",");  //dir - <5>
   sprintf(Lon, "%s%s\0", Lon, p);
 
-  p = strtok(NULL, ",");  //state
+  p = strtok(NULL, ",");  //state - <6>
+  //Serial.print("-");
+  //Serial.println(p);
+
+  if (p[0]>='1' & p[0]<='4') {
+    ;
+  }
+  else{
+    //Serial.println("[!] Invalid data");
+    msg_valid = 0;
+    return;
+  }
+
   sprintf(alt,"WV-BEAR,");
   
-  p = strtok(NULL, ",");    //sta-no
+  p = strtok(NULL, ",");    //sta-no - <7>
   strcat(alt,p);
   strcat(alt,",");
-  p = strtok(NULL, ",");    //horizontal
+  p = strtok(NULL, ",");    //horizontal 
   strcat(alt,p);
   strcat(alt,",alt=");
   p = strtok(NULL, ",");    //alti
