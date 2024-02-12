@@ -31,9 +31,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "cbcd623f44f4f6ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "doc/System requirements.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -99,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/System engineering - APRS.md",
+                "file": "doc/System requirements.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/System engineering - APRS.md",
+                "file": "doc/System requirements.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -139,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/System engineering - APRS.md"
+                "file": "doc/System requirements.md"
               }
             }
           },
@@ -169,13 +181,14 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "bb640cba578e6a36",
+  "active": "cbcd623f44f4f6ab",
   "lastOpenFiles": [
+    "doc/System engineering - APRS.md",
+    "doc/System requirements.md",
     "doc/reports/res/logical.svg",
     "doc/reports/res/UML_3.svg",
     "doc/reports/res/UML_2.svg",
     "doc/Experiments.md",
-    "doc/System engineering - APRS.md",
     "doc/reports/res/UML_1.svg",
     "doc/reports/res/Pasted image 20240211164506.png",
     "tracker_ahe/README.md",
