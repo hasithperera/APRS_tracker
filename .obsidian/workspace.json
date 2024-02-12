@@ -6,6 +6,7 @@
       {
         "id": "9fa948c8dbd77ffe",
         "type": "tabs",
+        "dimension": 99.99999999999999,
         "children": [
           {
             "id": "138732109ad1941b",
@@ -25,7 +26,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/Experiments.md",
+                "file": "doc/System engineering - APRS.md",
                 "mode": "source",
                 "source": false
               }
@@ -82,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 297.5
   },
   "right": {
     "id": "2fd52df7757ddde1",
@@ -98,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/Experiments.md",
+                "file": "doc/System engineering - APRS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/Experiments.md",
+                "file": "doc/System engineering - APRS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/Experiments.md"
+                "file": "doc/System engineering - APRS.md"
               }
             }
           },
@@ -168,10 +169,15 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "4f386b51247cb9f4",
+  "active": "bb640cba578e6a36",
   "lastOpenFiles": [
-    "Pasted image 20240211164506.png",
+    "doc/reports/res/logical.svg",
+    "doc/reports/res/UML_3.svg",
+    "doc/reports/res/UML_2.svg",
+    "doc/Experiments.md",
     "doc/System engineering - APRS.md",
+    "doc/reports/res/UML_1.svg",
+    "doc/reports/res/Pasted image 20240211164506.png",
     "tracker_ahe/README.md",
     "manual.md",
     "dtmf_code/USI_TWI_Master.h",
@@ -179,7 +185,6 @@
     "dtmf_code/README.md",
     "PCB/aprs_tracker_v3/aprs_tracker_v3.brd.old",
     "Manual.md",
-    "doc/Experiments.md",
     "dtmf_code/main.c",
     "dtmf_code/Makefile",
     "dtmf_code",

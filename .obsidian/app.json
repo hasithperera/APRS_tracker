@@ -1,4 +1,6 @@
 {
   "useMarkdownLinks": true,
-  "newLinkFormat": "relative"
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "doc/reports/res",
+  "alwaysUpdateLinks": true
 }

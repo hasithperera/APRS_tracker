@@ -29,19 +29,45 @@
 	- data down link. (uplink added as a Science requirement)
 
 ---
-# Concept - Diagram 
-
-
-
-
----
 # Use case diagram - Rocketry
 
+![UML_1](reports/res/UML_1.svg)
 
 
 ---
+# Use case diagram - NEBP
+
+
+![UML_2](reports/res/UML_2.svg)
+
+---
+
 # Use case diagram - NEBP + Science
+
+![UML_3](reports/res/UML_3.svg)
 
 ---
 # Logical architecture 
 
+![logical](reports/res/logical.svg)
+
+---
+## Interface specifications
+
+- RF IF
+	- **Data down link:** 144.390 MHz AX 2.5 encoded data stream every 5 mins
+		- Have a secondary frequency for high cadence data 
+	- **Up link**: some random frequency for each payload using DTMF commands
+- i2c IF
+	- DTMF and GPS time data will be sent to slave devices
+		- Commands:  upto 20 digits can be stored and sent as a single char array. shorter commands can be defined using the `#` as the termination char.
+		- GPS time: 3 8 bit integers containing hh,mm,ss in that order
+---
+## Interface specifications - 2
+
+- Physical IF
+	- the payload will be physically connected to the flight line with **Micro code** up to a length of 1 ft.
+	- These will be routed through a burn wire
+- Power IF
+	- 7.4 V Li-Ion cells
+	- a shared 5 V regulated supply up to 800 mA
