@@ -52,7 +52,7 @@ APRS ground testing.
 
 - updated the GPS module
 
-![aprs_v3](doc/aprs_v3.png)
+![aprs_v3](doc/reports/res/aprs_v3.png)
 
 ### update: January 2034
 - New design with an expansion slot to connect external modules.

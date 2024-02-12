@@ -184,11 +184,14 @@
   "active": "cbcd623f44f4f6ab",
   "lastOpenFiles": [
     "doc/System engineering - APRS.md",
+    "doc/Experiments.md",
+    "doc/reports/res/aprs_PCB_v2.2.png",
+    "doc/reports/res/aprs_v3.png",
+    "doc/reports/res/aprs_test.png",
     "doc/System requirements.md",
     "doc/reports/res/logical.svg",
     "doc/reports/res/UML_3.svg",
     "doc/reports/res/UML_2.svg",
-    "doc/Experiments.md",
     "doc/reports/res/UML_1.svg",
     "doc/reports/res/Pasted image 20240211164506.png",
     "tracker_ahe/README.md",
@@ -209,9 +212,6 @@
     "data/DTMF/DTMF - Test.md",
     "data/aprs_v3_diagnostics/SCR01.PNG",
     "data/README.md",
-    "data/res/Pasted image 20240105212120.png",
-    "Pasted image 20231225124723.png",
-    "data/DTMF/ALL0007/F0007TEK.JPG",
-    "data/DTMF/ALL0007/F0007TEK.BMP"
+    "data/res/Pasted image 20240105212120.png"
   ]
 }
