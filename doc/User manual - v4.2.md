@@ -24,6 +24,7 @@
 - When there is GPS lock decoded Longitude and Latitude is made available to the user.
 	- `3938.76N,07958.44W`
 - Sample terminal out put during simulation mode
+  
 	![](reports/res/Pasted%20image%2020240317233841.png)
 
 ## DTMF commanding 
