@@ -67,7 +67,7 @@ void setup() {
   //Wire.begin(0x08);     //added for i2c`:w
 
    
-  Serial.println("[info] KE8TJE - APRS tracker v4 - Beta");
+  Serial.println("[info] KE8TJE - APRS tracker v4.2 - Alpha");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
@@ -164,6 +164,9 @@ void loop() {
          if (digitalRead(sim_packet) == 0) {
           gps_raw = "$GNGGA,042303.000,3938.7688,N,07958.4412,W,1,09,1.33,328.5,M,-33.0,M,,*4F";
           //v4.2 test data
+         }else{
+          //print raw GPS data
+          Serial.println(gps_raw);
          }
         if (gps_raw.length() > 50) {
           gps_raw.toCharArray(test_data, 100);

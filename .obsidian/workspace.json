@@ -6,7 +6,6 @@
       {
         "id": "9fa948c8dbd77ffe",
         "type": "tabs",
-        "dimension": 50,
         "children": [
           {
             "id": "138732109ad1941b",
@@ -26,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/System engineering - APRS.md",
+                "file": "doc/User manual - v4.2.md",
                 "mode": "source",
                 "source": false
               }
@@ -34,21 +33,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "5d1769860c97e13d",
-        "type": "tabs",
-        "dimension": 50,
-        "children": [
-          {
-            "id": "626ec63a0b8f70d5",
-            "type": "leaf",
-            "state": {
-              "type": "marp-preview-view",
-              "state": {}
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -98,8 +82,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 297.5,
-    "collapsed": true
+    "width": 297.5
   },
   "right": {
     "id": "2fd52df7757ddde1",
@@ -115,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/System engineering - APRS.md",
+                "file": "doc/User manual - v4.2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/System engineering - APRS.md",
+                "file": "doc/User manual - v4.2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/System engineering - APRS.md"
+                "file": "doc/User manual - v4.2.md"
               }
             }
           },
@@ -185,11 +168,13 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "4f386b51247cb9f4",
+  "active": "bb640cba578e6a36",
   "lastOpenFiles": [
+    "doc/reports/res/Pasted image 20240317233841.png",
+    "doc/Experiments.md",
+    "doc/User manual - v4.2.md",
     "doc/System requirements.md",
     "doc/System engineering - APRS.md",
-    "doc/Experiments.md",
     "doc/reports/res/aprs_PCB_v2.2.png",
     "doc/reports/res/aprs_v3.png",
     "doc/reports/res/aprs_test.png",
