@@ -48,6 +48,9 @@ char Lat[] = "xxxx.xxxxxx";
 char Lon[] = "xxxxx.xxxxxxxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 char cmd[20];
+
+char test_data[100];
+
 int cmd_cnt = 0;
 
 int time_share = 0;
@@ -120,30 +123,32 @@ void loop() {
       String gps_raw = gps.readStringUntil('\n');
 
       // Valid data: $GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D
-      if (gps_raw.substring(0, 6) == "$GNRMC") {
-        //simulate locked data
-        if (digitalRead(sim_packet) == 0) {
-          //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
+      // if (gps_raw.substring(0, 6) == "$GNRMC") {
+      //   //simulate locked data
+      //   if (digitalRead(sim_packet) == 0) {
+      //     //gps_raw = "$GPGLL,3938.28486,N,07957.13511,W,191757.00,A,A*7D";
 
-          // V2 - Packet
-          // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
+      //     // V2 - Packet
+      //     // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
 
-          // V3 - Packet
-          // $GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C
-          Serial.println("[info] Sim Packet");
-        }
+      //     // V3 - Packet
+      //     gps_raw ="$GNRMC,134055.000,A,3509.7572,N,09010.4938,W,1.51,338.00,121023,,,A*6C";
+      //     Serial.println("[info] Sim Packet");
+      //   }
 
-        //Serial.println(gps_raw);
+      //   Serial.println(gps_raw);
 
 
-        if (gps_raw.length() > 30) {
-          msg_id++;
-          // GPS locked
-          //update_GPS(gps_raw);
+      //   if (gps_raw.length() > 30) {
+      //     msg_id++;
+      //     // GPS locked
+   
+      //     gps_raw.toCharArray(test_data, 100);
+      //     //Serial.println(test_data);
 
-          //i2c functions needed
-        }
-      }
+      //     //i2c functions needed
+      //   }
+      // }
 
       //long altitude packet - code
       // v2 - "$GPGGA"
@@ -156,13 +161,15 @@ void loop() {
       //$GNGGA,033145.000,3938.0803,N,07957.1891,W,1,09,1.05,293.2,M,-33.0,M,,*4D
 
       if (gps_raw.substring(0, 6) == "$GNGGA"){
-        
+         if (digitalRead(sim_packet) == 0) {
+          gps_raw = "$GNGGA,042303.000,3938.7688,N,07958.4412,W,1,09,1.33,328.5,M,-33.0,M,,*4F";
+          //v4.2 test data
+         }
         if (gps_raw.length() > 50) {
-          // GPS locked
-          //update_GPS(gps_raw);
-          Serial.println(gps_raw);
-          update_GPS_alt(gps_raw);
-          //i2c functions needed
+          gps_raw.toCharArray(test_data, 100);
+          char *p = strtok(test_data, ",");
+          update_GPS_alt(p);
+          msg_id++;
         }     
       }
 
@@ -174,9 +181,10 @@ void loop() {
 void update_GPS(String gps_data) {
 
 
-  char test_data[100];
+  
   gps_data.toCharArray(test_data, 100);
 
+  Serial.println(test_data);
   // V2 - Packet
   // $GPGLL,3927.83254,N,0808.25462,W,130448.00,A,A*71
 
@@ -236,7 +244,7 @@ void update_GPS(String gps_data) {
   msg_valid = 1;
 }
 
-void update_GPS_alt(String gps_data) {
+void update_GPS_alt(char *p) {
 
   //data is sent with 2 decimal places
   // reformat the data to be used by the APRS library
@@ -247,10 +255,7 @@ void update_GPS_alt(String gps_data) {
   // Documentation: https://openrtk.readthedocs.io/en/latest/communication_port/nmea.html
   //$GNGGA<0>,000520.095<1>,<2>,<3>,<4>,<5>,0<6>,0<7>,<8>,<9>,M<10>,<11>,M<12>,<13>,*5D<14>
 
-  char test_data[100];
-  gps_data.toCharArray(test_data, 100);
-
-  char *p = strtok(test_data, ",");  //code - <0>
+  //char *p = strtok(test_data, ",");  //code - <0>
   p = strtok(NULL, ",");             //time - <1>
 
 
@@ -296,7 +301,7 @@ void update_GPS_alt(String gps_data) {
     return;
   }
 
-  sprintf(alt,"APRS-v4.0,");
+  sprintf(alt,"APRS-v4.2,");
   
   p = strtok(NULL, ",");    //sta-no - <7>
   strcat(alt,p);
@@ -311,6 +316,10 @@ void update_GPS_alt(String gps_data) {
   
 
   msg_valid = 1;
+
+  Serial.print(Lat);
+  Serial.print(",");
+  Serial.println(Lon);
 }
 
 int location_update() {
