@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/User manual - v4.2.md",
+                "file": "doc/Packing list.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/User manual - v4.2.md",
+                "file": "doc/Packing list.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/User manual - v4.2.md",
+                "file": "doc/Packing list.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/User manual - v4.2.md"
+                "file": "doc/Packing list.md"
               }
             }
           },
@@ -168,13 +168,14 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "bb640cba578e6a36",
+  "active": "4f386b51247cb9f4",
   "lastOpenFiles": [
-    "doc/reports/res/Pasted image 20240317233841.png",
-    "doc/Experiments.md",
     "doc/User manual - v4.2.md",
-    "doc/System requirements.md",
+    "doc/Packing list.md",
     "doc/System engineering - APRS.md",
+    "doc/Experiments.md",
+    "doc/reports/res/Pasted image 20240317233841.png",
+    "doc/System requirements.md",
     "doc/reports/res/aprs_PCB_v2.2.png",
     "doc/reports/res/aprs_v3.png",
     "doc/reports/res/aprs_test.png",
@@ -200,7 +201,6 @@
     "PCB/aprs_tracker_v4/aprs_tracker_v4.~~~",
     "data/DTMF/DTMF - Test.md",
     "data/aprs_v3_diagnostics/SCR01.PNG",
-    "data/README.md",
-    "data/res/Pasted image 20240105212120.png"
+    "data/README.md"
   ]
 }
