@@ -24,7 +24,8 @@ int main(void) {
 
 //initialization to check if program mode is on
 
-#define SLAVE_APRS 0x08
+#define SLAVE_APRS 0x0A
+
 //#define debug 1
 
 
@@ -167,18 +168,18 @@ void cutdown(){
 	send_text(text,6);
 	_delay_ms(100);
 		
-/*
+
 	for(int i=0;i<10;i++){
 
 		PORTA |= _BV(PA5);
-		_delay_ms(1);
-		//PORTA &= ~_BV(PA5);
-	//	_delay_ms(10);
+		_delay_ms(10);
+		PORTA &= ~_BV(PA5);
+		_delay_ms(20);
 	}
 
 	//turn off mosfet
 	PORTA &= ~_BV(PA5);
 	_delay_ms(100);
-*/
+
 
 }

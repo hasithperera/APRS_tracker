@@ -47,7 +47,7 @@ SoftwareSerial gps(8, 10);  // RX, TX
 char Lat[] = "xxxx.xxxxxx";
 char Lon[] = "xxxxx.xxxxxxxx";
 char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-char cmd[20];
+
 
 char test_data[100];
 
@@ -60,6 +60,11 @@ char myCALL[] = "KE8TJE";
 float freq_tx;
 
 int packet_id = 0;
+
+//i2c commands
+char cmd[20];
+int cmd_indx=0;
+
 
 void setup() {
 
@@ -113,7 +118,7 @@ void loop() {
     Serial.println("[info] ------------------------ No location data");
   }
   gps.listen();
-  Wire.begin(0x08); //ahe-1
+  Wire.begin(0x0A); //ahe-1
   Wire.onReceive(receiveEvent); // ahe-1
   
 
@@ -348,7 +353,7 @@ int location_update() {
 
   APRS_setPreamble(300);
 
-  APRS_setCallsign(myCALL, 9);
+  APRS_setCallsign(myCALL, 11);
   //9 - Mobile station
   //11 - Aircraft/Balloon
   //7 - Hand held
@@ -365,15 +370,15 @@ int location_update() {
   // $ - phone
   // [ - walker
 
-  APRS_setSymbol('>');  
+  APRS_setSymbol('O');  
 
 
-  char comment[30];
+  char comment[40];
   //delay(100);
   //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
   //APRS_sendLoc(comment, strlen(comment), ' ');
 
-  sprintf(alt,"%s,%d",alt,packet_id++);
+  sprintf(alt,"%s,%d/%s",alt,packet_id++,cmd);
   APRS_sendLoc(alt, strlen(alt), ' ');
 
   delay(1200);
@@ -392,9 +397,19 @@ void receiveEvent(int howMany) {
   }*/
   //cmd[cmd_cnt++];
   int x = Wire.read();    // receive byte as an integer
-  Serial.print(x);         // print the integer
-  Serial.print(',');
-  if(cmd==12)
-    Serial.println();
+  Serial.print("rx:");         // print the integer
+  Serial.println(x);
+  
+  
+  cmd[cmd_indx]=x+'A';
+  // reset counter 
+
+  //handel end of string
+  if(x==12){
+    cmd[cmd_indx]='\0';
+    cmd_indx = 0;
+  }
+
+ 
 
 }
