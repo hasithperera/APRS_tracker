@@ -18,6 +18,8 @@ char cmd_no=0;
 char cmd_str[4] ={7,8,9,12};
 int cmd_match=1;
 
+char text[15]="0987654321*#";
+
 int main(void) {
 
 //initialization to check if program mode is on
@@ -46,10 +48,13 @@ if(PINA & _BV(PA7)){
 	sei();
 
 	//i2c test
-	
+	// i2c test reset
+
+	strcpy(text,"AAAAAM");
+	send_text(text,6);	
+
 	while(1){	
 
-//	send_i2c_data(65,SLAVE_APRS);
 
 
 	if(cmd){
@@ -147,21 +152,33 @@ void send_i2c_data(char data,char address){
 
 }
 
+void send_text(char *data,int size){
+	for(int i=0;i<size;i++){
+		send_i2c_data(*(data+i)-'A',SLAVE_APRS);
+	}
+
+}
 
 void cutdown(){
 	// cutdown sequence
-	for(int i=0;i<20;i++){
+	
+	//send I2C sequence
+	strcpy(text,"BBBBBM");
+	send_text(text,6);
+	_delay_ms(100);
+		
+/*
+	for(int i=0;i<10;i++){
 
 		PORTA |= _BV(PA5);
-		_delay_ms(100);
-#ifndef debug
-		PORTA &= ~_BV(PA5);
-	 	_delay_ms(100);
-#endif
+		_delay_ms(1);
+		//PORTA &= ~_BV(PA5);
+	//	_delay_ms(10);
 	}
 
 	//turn off mosfet
 	PORTA &= ~_BV(PA5);
 	_delay_ms(100);
+*/
 
 }
