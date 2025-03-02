@@ -11,9 +11,17 @@ import matplotlib.pyplot as plt
 
 import pandas as pd
 
+# indx = 363
+# file = 'NEBP-2/aprsfi_export_KE8TJE-11_20230930_234754_20231001_234754.csv'
+# file_MSU = './NEBP-2/flight-300234064701700-2023-10-01.csv'
 
-#file = 'NEBP-2/Recovery-Direct_APRSAX25rcvd-2023-10-01.csv'
+
+
+indx = 519
 file = 'HAB_launch-14_10_23/aprsfi_export_KE8TJE-11_20231013_205022_20231015_205022.csv';
+file_MSU = './HAB_launch-14_10_23/flight-300234064701700-2023-10-14.csv'
+
+
 df = pd.read_csv(file)
 
 #0 - time
@@ -39,28 +47,41 @@ for i in range(0,df.shape[0]):
         altitude[i] = tmp_alt
 #        
 df['alt'] = altitude
-df['fixed_dt']=pd.to_datetime(df['time'], dayfirst=True)
+df['fixed_dt']=pd.to_datetime(df['time'], dayfirst=True,utc=True)
 
-plt.plot(df['fixed_dt'],df['alt']/1000,'o-')
-#plt.xticks(np.arange(0, df.shape[0], step=20),rotation='vertical')
 
-plt.ylabel('Altitude (km)')
-plt.xlabel('Time')
-plt.tight_layout()
 
 ###################
 ### load MSU data
 #
 ##plt.figure()
-file_MSU = './HAB_launch-14_10_23/flight-300234064701700-2023-10-14.csv'
+
 df_msu = pd.read_csv(file_MSU)
 #
 df_msu['fixed_dt']=pd.to_datetime(df_msu['datetime'], dayfirst=True)
 
-plt.plot(df_msu['fixed_dt'],df_msu['altitude']/1000,'.-')
-plt.legend(['APRS','Iridium'])
+
+
+#tx launch 300 
+
+plt.plot((df_msu['fixed_dt']-df_msu['fixed_dt'][indx])/1e9,df_msu['altitude']/1000,'.-')
+
+# plt.plot(df_msu['altitude']/1000,'.-')
+
 #plt.xticks(np.arange(0, df_msu.shape[0], step=40),rotation='vertical')
 plt.tight_layout()
+
+plt.plot((df['fixed_dt']-df_msu['fixed_dt'][indx])/1e9,df['alt']/1000,'o-')
+#plt.xticks(np.arange(0, df.shape[0], step=20),rotation='vertical')
+
+plt.ylabel('Altitude (km)')
+plt.xlabel('Time (s)')
+plt.tight_layout()
+
+# plt.legend(['Iridium','APRS'])
+
+
+plt.legend(['iridium-1','aprs-1','iridium-2','aprs-2'])
 #plt.show()
 #
 #
