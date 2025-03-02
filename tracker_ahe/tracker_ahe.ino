@@ -25,15 +25,36 @@
 #define TX 15  // arduino serial TX pin to the DRA818 RX pin
 
 // old 300
-#define timeout 150
+#define timeout 300
 
-#define freq_rx 146.800
+#define freq_rx 146.875
 #define freq_main 144.390
 #define freq_alt 145.390
+#define alt_freq_delay 10 //every 10 packets it will switch to alt freq
 
 #define ctcss 146.2
 
-//#define simulate 1
+#define simulate 0 // Set to 1 for testing
+#define firmware_v 4.3
+
+#define aprs_icon_low 'S'
+#define aprs_icon_high 'O'
+
+// Icon - setting:
+  //APRS_setSymbol('S');
+  // S - shuttle
+  // < - Bike
+  // O - Balloon
+  // > - car
+  // $ - phone
+  // [ - walker
+
+#define aprs_id 11
+
+//9 - Mobile station
+//11 - Aircraft/Balloon
+//7 - Hand held
+
 
 
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
@@ -59,7 +80,11 @@ int msg_valid = 0;
 char myCALL[] = "KE8TJE";
 float freq_tx;
 
+float alt_num = 0;
+
 int packet_id = 0;
+int radio_freq_change = 0;
+
 
 void setup() {
 
@@ -67,13 +92,15 @@ void setup() {
   //Wire.begin(0x08);     //added for i2c`:w
 
    
-  Serial.println("[info] KE8TJE - APRS tracker v4.2 - Alpha");
+  Serial.println("[info] KE8TJE - APRS tracker");
+  Serial.print(firmware_v);
+  Serial.println("v");
   Serial.println("[info] IO init");
   dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
   init_radio();
   radio_on();
-  set_radio_pwr(0);
+  set_radio_pwr(1); // 0 low power
 
   // afternate frequancy in run time
   if (digitalRead(radio_freq_sw)) {
@@ -161,8 +188,8 @@ void loop() {
       //$GNGGA,033145.000,3938.0803,N,07957.1891,W,1,09,1.05,293.2,M,-33.0,M,,*4D
 
       if (gps_raw.substring(0, 6) == "$GNGGA"){
-         if (digitalRead(sim_packet) == 0) {
-          gps_raw = "$GNGGA,042303.000,3938.7688,N,07958.4412,W,1,09,1.33,328.5,M,-33.0,M,,*4F";
+         if (digitalRead(sim_packet) == 0 || simulate) {
+          gps_raw = "$GNGGA,042303.000,3938.7688,N,07958.4412,W,1,09,1.33,8328.5,M,-33.0,M,,*4F";
           //v4.2 test data
          }else{
           //print raw GPS data
@@ -304,8 +331,9 @@ void update_GPS_alt(char *p) {
     return;
   }
 
-  sprintf(alt,"APRS-v4.2,");
-  
+  // add firmware version to the packet
+  sprintf(alt,"%x,",firmware_v);
+ 
   p = strtok(NULL, ",");    //sta-no - <7>
   strcat(alt,p);
   strcat(alt,",");
@@ -313,6 +341,7 @@ void update_GPS_alt(char *p) {
   strcat(alt,p);
   strcat(alt,",alt=");
   p = strtok(NULL, ",");    //alti
+  alt_num = atof(p);  //added altitude conversion for conditiona statements
   strcat(alt,p);
   p = strtok(NULL, ",");    //alti-unit
   strcat(alt,p);
@@ -323,6 +352,19 @@ void update_GPS_alt(char *p) {
   Serial.print(Lat);
   Serial.print(",");
   Serial.println(Lon);
+
+  if(packet_id%alt_freq_delay==0 && radio_freq_change){
+    dra->group(DRA818_12K5, freq_alt, freq_alt, 13, 4, 0);
+    Serial.println("alt_freq");
+    radio_freq_change = 0;
+
+  }
+
+  if(packet_id%alt_freq_delay==1 && radio_freq_change){
+    dra->group(DRA818_12K5, 144.390, 144.390, 13, 4, 0);
+    Serial.println("main_freq");
+    radio_freq_change = 0;
+  }
 }
 
 int location_update() {
@@ -340,32 +382,29 @@ int location_update() {
     }
   }
   */
+
+  if(alt_num>7000){
+    APRS_setSymbol(aprs_icon_low);  
+    set_radio_pwr(0);
+  }else{
+    APRS_setSymbol(aprs_icon_high);  
+    set_radio_pwr(1);
+  }
   
   //radio_TX();
   Serial.println("[info] APRS:start");
   time_share = 0;
   APRS_init();
 
-  APRS_setPreamble(300);
+  APRS_setPreamble(400);
 
-  APRS_setCallsign(myCALL, 9);
-  //9 - Mobile station
-  //11 - Aircraft/Balloon
-  //7 - Hand held
-
+  APRS_setCallsign(myCALL, aprs_id);
   APRS_setLat(Lat);
   APRS_setLon(Lon);
+  
 
-  // Icon - setting:
-  //APRS_setSymbol('S');
-  // S - shuttle
-  // < - Bike
-  // O - Balloon
-  // > - car
-  // $ - phone
-  // [ - walker
 
-  APRS_setSymbol('>');  
+  
 
 
   char comment[30];
@@ -376,12 +415,13 @@ int location_update() {
   sprintf(alt,"%s,%d",alt,packet_id++);
   APRS_sendLoc(alt, strlen(alt), ' ');
 
-  delay(1200);
+  delay(1500);
 
   Serial.println("[info] APRS:end");
   Serial.println(alt);
   msg_valid = 0;
   //gps.flush();
+  radio_freq_change = 1;
 }
 
 
