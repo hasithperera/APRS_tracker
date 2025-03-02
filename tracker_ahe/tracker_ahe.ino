@@ -14,6 +14,7 @@
 /* Used Pins */
 #define radio_wake 16
 #define radio_ppt 13  //not needed
+
 #define radio_pwr 17
 #define alternate_freq 12
 #define radio_sql 2
@@ -57,9 +58,10 @@
 
 
 
+
 SoftwareSerial *dra_serial;  // Serial connection to DRA818
 DRA818 *dra;                 // the DRA object once instanciated
-                             // the next frequency to scan
+
 String packetBuffer;
 SoftwareSerial gps(8, 10);  // RX, TX
 
@@ -67,12 +69,14 @@ SoftwareSerial gps(8, 10);  // RX, TX
 // W8CUL location
 char Lat[] = "xxxx.xxxxxx";
 char Lon[] = "xxxxx.xxxxxxxx";
-char alt[] = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+char alt[] = "xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx";  //43 chars 
 char cmd[20];
 
 char test_data[100];
 
 int cmd_cnt = 0;
+
+char final_msg[100];
 
 int time_share = 0;
 int msg_id = 0;
@@ -140,9 +144,10 @@ void loop() {
     Serial.println("[info] ------------------------ No location data");
   }
   gps.listen();
+
   Wire.begin(0x08); //ahe-1
   Wire.onReceive(receiveEvent); // ahe-1
-  
+
 
   while (time_share < timeout) {
     while (gps.available() > 0) {
@@ -202,7 +207,6 @@ void loop() {
           msg_id++;
         }     
       }
-
     }
   }
   time_share = 0;
@@ -347,6 +351,8 @@ void update_GPS_alt(char *p) {
   strcat(alt,p);
   
 
+  //Serial.print("alt len:");
+  //strcpy(alt,final_msg);
   msg_valid = 1;
 
   Serial.print(Lat);
@@ -393,6 +399,7 @@ int location_update() {
   
   //radio_TX();
   Serial.println("[info] APRS:start");
+  Serial.println(alt);
   time_share = 0;
   APRS_init();
 
@@ -402,11 +409,6 @@ int location_update() {
   APRS_setLat(Lat);
   APRS_setLon(Lon);
   
-
-
-  
-
-
   char comment[30];
   //delay(100);
   //sprintf(comment, "NEBP-WV msg_id:%d", msg_id);
@@ -414,6 +416,7 @@ int location_update() {
 
   sprintf(alt,"%s,%d",alt,packet_id++);
   APRS_sendLoc(alt, strlen(alt), ' ');
+  
 
   delay(1500);
 
