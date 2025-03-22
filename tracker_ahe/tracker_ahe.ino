@@ -101,9 +101,12 @@ void setup() {
   Serial.println("[info] KE8TJE - APRS tracker");
   Serial.print(firmware_v);
   Serial.println("v");
+  Serial.println("[info] Pause");
+  delay(5000);
   Serial.println("[info] IO init");
-  dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
 
+  dra_serial = new SoftwareSerial(RX, TX);  // Instantiate the Software Serial Object.
+  
   init_radio();
   radio_on();
   set_radio_pwr(1);  // 0 low power
@@ -202,6 +205,10 @@ void update_GPS_v2(char *p) {
     msg_valid = 0;
     return;
   }
+  p = strtok(NULL, ",");
+  p = strtok(NULL, ",");
+  p = strtok(NULL, ","); //<9> alt
+  alt_num = atof(p);
 
  
 
@@ -325,8 +332,6 @@ int location_update() {
 
   //radio_TX();
   Serial.println("[info] APRS:start");
-  sprintf(alt, "KE8TJE APRS v5.2 msg_id:");
-  Serial.println(alt);
 
   APRS_init();
 
@@ -335,10 +340,14 @@ int location_update() {
   APRS_setCallsign(myCALL, aprs_id);
   APRS_setLat(Lat);
   APRS_setLon(Lon);
+  int alt_km = int(alt_num)/1000;
+  int alt_sub_1k = int(int(alt_num)%1000)/10;
+
+  if(packet_id==999) packet_id=0; //reset counter for telemetry
 
   char comment[30];
   //delay(100);
-  sprintf(alt, "%s,%d", alt, packet_id++);
+  sprintf(alt, "#T%03d,%d,%d",packet_id++,alt_km,alt_sub_1k);
   APRS_sendLoc(alt, strlen(alt), ' ');
   
 
